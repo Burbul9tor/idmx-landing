@@ -55,9 +55,7 @@ function openDemoModal() {
   isDemoModalOpen.value = true
 }
 
-function closeDemoModal() {
-  isDemoModalOpen.value = false
-}
+
 
 onMounted(() => {
   handleScroll()
