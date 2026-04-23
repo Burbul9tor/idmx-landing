@@ -1,0 +1,219 @@
+:root {
+  --white:#ffff;
+  --color-bg: #060e20;
+  --color-text: #1d2430;
+  --color-primary: #019dff;
+  --color-primary-light: #36b1ff;
+  --color-muted: #61758b;
+  --container-width: 1200px;
+  --container-padding: 24px;
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --shadow-soft: 0 18px 48px rgba(20, 65, 105, 0.1);
+  --color-hero-bg-start: #0f172a;
+  --color-hero-bg-end: #0f172a;
+  --color-hero-bg-radial: #111827;
+  --color-hero-bg-radial-transparent: rgba(40, 89, 186, 0);
+
+  --color-hero-grid-line: rgba(220, 241, 255, 0.06);
+
+  --color-hero-glow-primary: rgba(1, 157, 255, 0.32);
+  --color-hero-glow-primary-soft: rgba(1, 157, 255, 0.12);
+  --color-hero-glow-secondary: rgba(54, 177, 255, 0.22);
+
+  --color-hero-title: #ffffff;
+  --color-hero-subtitle: rgba(220, 241, 255, 0.74);
+
+  --color-hero-bullet-border: rgba(220, 241, 255, 0.12);
+  --color-hero-bullet-border-hover: rgba(220, 241, 255, 0.2);
+  --color-hero-bullet-bg: rgba(255, 255, 255, 0.06);
+  --color-hero-bullet-bg-hover: rgba(255, 255, 255, 0.08);
+  --color-hero-bullet-inner-shadow: rgba(255, 255, 255, 0.05);
+  --color-hero-bullet-shadow: rgba(0, 0, 0, 0.08);
+  --color-hero-bullet-text: rgba(220, 241, 255, 0.96);
+
+  --color-hero-eyebrow-border: rgba(220, 241, 255, 0.14);
+  --color-hero-eyebrow-bg: rgba(255, 255, 255, 0.05);
+  --color-hero-eyebrow-text: rgba(220, 241, 255, 0.82);
+
+  --color-hero-bullet-icon-bg: rgba(255, 255, 255, 0.08);
+  --color-hero-bullet-icon-inner-shadow: rgba(255, 255, 255, 0.05);
+
+  --color-hero-button-text: #ffffff;
+  --color-hero-button-bg-start: #019dff;
+  --color-hero-button-bg-middle: #47b8ff;
+  --color-hero-button-bg-end: #019dff;
+  --color-hero-button-shadow: rgba(1, 157, 255, 0.25);
+  --color-hero-button-glow: rgba(1, 157, 255, 0.18);
+  --color-hero-button-shadow-hover: rgba(1, 157, 255, 0.3);
+  --color-hero-button-glow-hover: rgba(1, 157, 255, 0.22);
+
+  --color-hero-note-border: rgba(220, 241, 255, 0.1);
+  --color-hero-note-bg: rgba(255, 255, 255, 0.05);
+  --color-hero-note-inner-shadow: rgba(255, 255, 255, 0.04);
+  --color-hero-note-shadow: rgba(0, 0, 0, 0.06);
+
+  --color-hero-note-dot: #22c55e;
+  --color-hero-note-dot-ring: rgba(34, 197, 94, 0.12);
+  --color-hero-note-dot-pulse-start: rgba(34, 197, 94, 0.18);
+  --color-hero-note-dot-pulse-end: rgba(34, 197, 94, 0.08);
+
+  --color-hero-note-title: #dcf1ff;
+  --color-hero-note-text: rgba(220, 241, 255, 0.72);
+
+  --color-problems-card-shadow-hover: rgba(252, 3, 3, 0.082);
+  --color-problems-card-border-hover: rgba(226, 0, 0, 0.12);
+
+  --font-size-hero-title: clamp(32px, 5vw, 48px);
+  --font-weight-hero-title: 600;
+  --line-height-hero-title: 1.09;
+
+  --font-size-hero-subtitle: 22px;
+  --font-weight-hero-subtitle: 400;
+  --line-height-hero-subtitle: 1.6;
+
+  --font-size-hero-eyebrow: 11px;
+  --font-weight-hero-eyebrow: 500;
+
+  --font-size-hero-bullet: 14px;
+  --font-weight-hero-bullet: 400;
+  --line-height-hero-bullet: 1.45;
+
+  /* === BUTTON === */
+
+  --font-size-button: 16px;
+  --font-weight-button: 500;
+
+  /* === NOTE === */
+
+  --font-size-note-title: 13px;
+  --font-weight-note-title: 500;
+
+  --font-size-note-text: 13px;
+  --font-weight-note-text: 400;
+
+  --color-problems-bg: #f7f8fa;
+
+  --color-problems-accent: #ff4d4f;
+
+  --color-problems-eyebrow: #2b2f36;
+  --color-problems-title: #22252d;
+  --color-problems-subtitle: #66788a;
+
+  --color-problems-card-bg: #fdf2f2;
+  --color-problems-card-border: rgba(190, 114, 114, 0.06);
+  --color-problems-card-shadow: rgba(28, 31, 36, 0.04);
+  --color-problems-card-text: #8e4e4e;
+
+  --color-problems-result-text: #8e4e4e;
+
+  
+
+  --font-size-problems-eyebrow: 14px;
+  --font-weight-problems-eyebrow: 500;
+
+  --font-size-problems-title: 36px;
+  --font-weight-problems-title: 500;
+  --line-height-problems-title: 1.15;
+
+  --font-size-problems-subtitle: 18px;
+  --font-weight-problems-subtitle: 400;
+  --line-height-problems-subtitle: 1.5;
+
+  --font-size-problems-card: 18px;
+  --font-weight-problems-card: 400;
+  --line-height-problems-card: 1.25;
+
+  --font-size-problems-result: 16px;
+  --font-weight-problems-result: 400;
+  --line-height-problems-result: 1.35;
+
+  /* ===how === */
+  --color-how-bg: #F4F9FD;
+  --color-how-accent: #2ea6ff;
+  --color-how-line: rgba(46, 166, 255, 0.9);
+
+  --color-how-eyebrow: #2b2f36;
+  --color-how-title: #22252d;
+  --color-how-subtitle: #66788a;
+  --color-how-divider: #2b2f36;
+
+  --color-how-card-bg: #eef7ff;
+  --color-how-card-border: rgba(46, 166, 255, 0.12);
+  --color-how-card-border-hover: rgba(46, 166, 255, 0.24);
+  --color-how-card-shadow: rgba(28, 31, 36, 0.04);
+  --color-how-card-shadow-hover: rgba(28, 31, 36, 0.08);
+
+  --color-how-card-title: #22252d;
+  --color-how-card-text: #335a7c;
+   --color-how-bg: #f7f9fc;
+
+  --color-how-step-bg: rgba(46, 166, 255, 0.08);
+  --color-how-step-text: #1396ff;
+
+  --font-size-how-eyebrow: 14px;
+  --font-weight-how-eyebrow: 500;
+
+  --font-size-how-title: 36px;
+  --font-weight-how-title: 500;
+  --line-height-how-title: 1.15;
+
+  --font-size-how-subtitle: 18px;
+  --font-weight-how-subtitle: 400;
+  --line-height-how-subtitle: 1.5;
+
+  --font-size-how-divider: 14px;
+  --font-weight-how-divider: 500;
+
+  --font-size-how-card-title: 18px;
+  --font-weight-how-card-title: 500;
+  --line-height-how-card-title: 1.25;
+
+  --font-size-how-card-text: 14px;
+  --font-weight-how-card-text: 400;
+  --line-height-how-card-text: 1.4;
+
+  --font-size-how-step: 20px;
+  --font-weight-how-step: 600;
+  
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Inter;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  width: min(var(--container-width), calc(100% - 2 * var(--container-padding)));
+  margin: 0 auto;
+}
