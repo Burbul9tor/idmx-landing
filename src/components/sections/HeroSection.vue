@@ -63,8 +63,8 @@ const emit = defineEmits(['open-demo'])
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: max(820px, 100svh);
-  padding: 120px 0 100px;
+  min-height: max(920px, 100svh);
+  padding: 40px 0 100px;
   animation: heroFadeIn 0.6s ease;
   background:
     radial-gradient(
@@ -242,9 +242,10 @@ const emit = defineEmits(['open-demo'])
   margin: 0 0 22px;
   color: var(--color-hero-title);
   font-size: var(--font-size-hero-title);
-  font-weight: var(--font-weight-hero-title);
-  line-height: var(--line-height-hero-title);
-  letter-spacing: -0.01em;
+  font-weight: 800;
+  line-height: 68px;
+  max-width: 960px;
+  
 }
 
 .hero__title-logo {
@@ -289,9 +290,9 @@ const emit = defineEmits(['open-demo'])
   border-radius: 16px;
   cursor: pointer;
   color: var(--color-hero-button-text);
-  font-size: var(--font-size-hero-button);
-  font-weight: var(--font-weight-hero-button);
-  line-height: var(--line-height-hero-button);
+  font-size: var(--font-size-button);
+  font-weight: var(--font-weight-button);
+  line-height: var(--line-height-button);
   letter-spacing: -0.01em;
   background: linear-gradient(
     135deg,
@@ -541,7 +542,7 @@ const emit = defineEmits(['open-demo'])
 @media (max-width: 768px) {
   .hero {
     min-height: 100svh;
-    padding: 96px 0 72px;
+    padding: 96px 24px 72px;
   }
 
   .hero__aurora--one {
@@ -575,10 +576,15 @@ const emit = defineEmits(['open-demo'])
 
   .hero__title {
     gap: 10px;
+     font-size: var(--font-size-hero-title);
+  font-weight: 800;
+  line-height: 38px;
+  max-width: 560px;
   }
 
   .hero__title-logo {
-    height: 70px;
+    color: var(--color-hero-title);
+ ;
   }
 
   .hero__subtitle {

@@ -65,7 +65,7 @@ const toggleItem = (index: number) => {
 <style scoped>
 .faq {
   padding: 120px 0;
-  background: var(--color-how-bg);
+  background: var(--background-block);
 }
 
 .faq__inner {

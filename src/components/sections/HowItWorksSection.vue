@@ -141,7 +141,7 @@ const bottomSteps = computed(() => text.value.how.bottomSteps)
 <style scoped>
 .how-it-works {
   padding: 120px 0;
-  background: var(--color-how-bg);
+  background: var(--background-block);
 }
 
 .how-it-works__inner {
@@ -153,52 +153,47 @@ const bottomSteps = computed(() => text.value.how.bottomSteps)
 .how-it-works__head {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .how-it-works__eyebrow {
   position: relative;
-  display: inline-flex;
-  justify-content: center;
+  display: inline-block;
   margin-bottom: 20px;
-  color: var(--color-how-eyebrow);
-  font-size: var(--font-size-how-eyebrow);
-  font-weight: var(--font-weight-how-eyebrow);
-  line-height: 1.2;
-  letter-spacing: 0.04em;
+
+  font-size: var(--font-size-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+
+  color: var(--color-text);
 }
 
 .how-it-works__eyebrow::after {
   content: '';
   position: absolute;
-  left: 50%;
-  bottom: -8px;
-  width: 144px;
+  left: 0;
+  bottom: -10px;
+  width: 100%;
   height: 2px;
   border-radius: 999px;
-  background: var(--color-how-accent);
-  transform: translateX(-50%);
+  background: var(--color-primary);
 }
 
 .how-it-works__title {
   margin: 0 0 14px;
-  max-width: 980px;
-  color: var(--color-how-title);
-  font-size: var(--font-size-how-title);
-  font-weight: var(--font-weight-how-title);
-  line-height: var(--line-height-how-title);
-  letter-spacing: -0.02em;
+  max-width: 1240px;
+  font-size: var(--font-size-title);
+  font-weight: 800;
+  color: var(--color-text);
 }
 
 .how-it-works__subtitle {
   margin: 0;
-  max-width: 1000px;
-  color: var(--color-how-subtitle);
-  font-size: var(--font-size-how-subtitle);
-  font-weight: var(--font-weight-how-subtitle);
-  line-height: var(--line-height-how-subtitle);
+  max-width: 1240px;
+  color: var(--color-subtitle);
+  font-size: var(--font-size-subtitle);
 }
 
 .how-it-works__scheme {
@@ -358,10 +353,11 @@ const bottomSteps = computed(() => text.value.how.bottomSteps)
   position: relative;
   z-index: 2;
   align-self: center;
-  margin: 12px 0 4px;
-  padding: 0 14px;
-  background: var(--color-how-bg);
-  color: var(--color-how-divider);
+  margin: 6px 0 4px;
+  padding: 6px 18px;
+  background: var(--color-primary);
+  border-radius: 99px;
+  color: var(--white);
   font-size: var(--font-size-how-divider);
   font-weight: var(--font-weight-how-divider);
   line-height: 1.2;
@@ -371,27 +367,29 @@ const bottomSteps = computed(() => text.value.how.bottomSteps)
 .how-card {
   position: relative;
   z-index: 2;
+
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  border-radius: 22px;
-  border: 1px solid var(--color-how-card-border);
-  background: var(--color-how-card-bg);
-  box-shadow: 0 10px 30px var(--color-how-card-shadow);
+  align-items: flex-start;
+  text-align: left;
+
+  border-radius: 24px;
+  background: var(--white);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(22px);
+
   transition:
     opacity 0.65s ease,
     transform 0.65s ease,
-    box-shadow 0.25s ease,
-    border-color 0.25s ease;
+    box-shadow 0.25s ease;
 }
 
 .how-it-works--visible .how-card {
   opacity: 1;
   transform: translateY(0);
-  cursor: pointer;
 }
 
 
@@ -440,13 +438,13 @@ const bottomSteps = computed(() => text.value.how.bottomSteps)
   margin: 0 0 12px;
   color: var(--color-how-card-title);
   font-size: var(--font-size-how-card-title);
-  font-weight: var(--font-weight-how-card-title);
+  font-weight: 600;
   line-height: var(--line-height-how-card-title);
 }
 
 .how-card__text {
   margin: 0;
-  color: var(--color-how-card-text);
+  color: var(--color-subtitle);
   font-size: var(--font-size-how-card-text);
   font-weight: var(--font-weight-how-card-text);
   line-height: var(--line-height-how-card-text);
@@ -509,10 +507,23 @@ const bottomSteps = computed(() => text.value.how.bottomSteps)
     padding: 0;
     background: transparent;
     text-align: center;
+    color: var(--color-text);
   }
 }
 
 @media (max-width: 768px) {
+  .how-it-works__title {
+    margin-bottom: 12px;
+    max-width: 100%;
+    font-size: 36px;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+  }
+  .how-it-works__subtitle {
+    max-width: 100%;
+    font-size: 16px;
+    line-height: 1.55;
+  }
   .how-it-works {
     padding: 88px 0;
   }

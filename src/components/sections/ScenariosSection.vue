@@ -266,7 +266,7 @@ const setActive = (index: number) => {
 <style scoped>
 .scenarios {
   padding: 120px 0;
-  background: var(--color-how-bg);
+  background: var(--background-block);
 }
 
 .scenarios__inner {

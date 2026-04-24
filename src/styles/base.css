@@ -1,8 +1,30 @@
 :root {
+  /* === COLOR === */
   --white:#ffff;
   --color-bg: #060e20;
-  --color-text: #1d2430;
+  --background-block:#F0F4FA;
+  --background-dark: 
+    radial-gradient(
+      80% 80% at 50% 20%,
+      rgba(18, 44, 96, 0.28) 0%,
+      rgba(10, 18, 40, 0) 60%
+    ),
+    linear-gradient(
+      180deg,
+      var(--color-hero-bg-start) 0%,
+      var(--color-hero-bg-end) 100%
+    );
+  --color-bg-light:
+    radial-gradient(circle at 15% 10%, rgba(1, 157, 255, 0.12), transparent 34%),
+    radial-gradient(circle at 85% 20%, rgba(255, 98, 55, 0.10), transparent 30%),
+    linear-gradient(180deg, #f7fbff 0%, #ffffff 52%, #f5f8fc 100%);
+  --border-top: 1px solid rgba(1, 157, 255, 0.12); 
+  --color-text: #0D1424;
+  --color-subtitle:#5a6b82;
   --color-primary: #019dff;
+  --color-red:#C01C1C;
+  --color-border: rgba(213, 225, 238, 0.9);
+  
   --color-primary-light: #36b1ff;
   --color-muted: #61758b;
   --container-width: 1200px;
@@ -61,14 +83,25 @@
   --color-hero-note-title: #dcf1ff;
   --color-hero-note-text: rgba(220, 241, 255, 0.72);
 
-  --color-problems-card-shadow-hover: rgba(252, 3, 3, 0.082);
-  --color-problems-card-border-hover: rgba(226, 0, 0, 0.12);
 
-  --font-size-hero-title: clamp(32px, 5vw, 48px);
+  /* === SHADOW === */
+  --shadow-card: 0 18px 48px rgba(15, 42, 72, 0.1);
+  --shadow-card-hover: 0 24px 56px rgba(15, 42, 72, 0.16);
+
+  /* === FONT HERO === */
+  --font-size-hero-title: clamp(36px, 5vw, 64px);
+  
+ /* === FONT BLOCK === */
+ --font-size-eyebrow:14px;
+  --font-size-title: 64px;
+  --font-size-subtitle: 22px;
+  --font-weight-title: 500;
+  --font-size-hero-subtitle: 22px;
   --font-weight-hero-title: 600;
   --line-height-hero-title: 1.09;
+  --font-size-card-title: 20px;
 
-  --font-size-hero-subtitle: 22px;
+      
   --font-weight-hero-subtitle: 400;
   --line-height-hero-subtitle: 1.6;
 
@@ -85,97 +118,19 @@
   --font-weight-button: 500;
 
   /* === NOTE === */
-
-  --font-size-note-title: 13px;
-  --font-weight-note-title: 500;
-
-  --font-size-note-text: 13px;
-  --font-weight-note-text: 400;
-
-  --color-problems-bg: #f7f8fa;
-
-  --color-problems-accent: #ff4d4f;
-
-  --color-problems-eyebrow: #2b2f36;
-  --color-problems-title: #22252d;
-  --color-problems-subtitle: #66788a;
-
-  --color-problems-card-bg: #fdf2f2;
-  --color-problems-card-border: rgba(190, 114, 114, 0.06);
-  --color-problems-card-shadow: rgba(28, 31, 36, 0.04);
-  --color-problems-card-text: #8e4e4e;
-
-  --color-problems-result-text: #8e4e4e;
-
-  
-
-  --font-size-problems-eyebrow: 14px;
-  --font-weight-problems-eyebrow: 500;
-
-  --font-size-problems-title: 36px;
-  --font-weight-problems-title: 500;
-  --line-height-problems-title: 1.15;
-
-  --font-size-problems-subtitle: 18px;
-  --font-weight-problems-subtitle: 400;
-  --line-height-problems-subtitle: 1.5;
-
-  --font-size-problems-card: 18px;
-  --font-weight-problems-card: 400;
-  --line-height-problems-card: 1.25;
-
-  --font-size-problems-result: 16px;
-  --font-weight-problems-result: 400;
-  --line-height-problems-result: 1.35;
-
   /* ===how === */
-  --color-how-bg: #F4F9FD;
-  --color-how-accent: #2ea6ff;
-  --color-how-line: rgba(46, 166, 255, 0.9);
+--color-how-line: rgba(46, 166, 255, 0.9);
 
-  --color-how-eyebrow: #2b2f36;
-  --color-how-title: #22252d;
-  --color-how-subtitle: #66788a;
-  --color-how-divider: #2b2f36;
+--color-how-divider: #2b2f36;
 
-  --color-how-card-bg: #eef7ff;
-  --color-how-card-border: rgba(46, 166, 255, 0.12);
-  --color-how-card-border-hover: rgba(46, 166, 255, 0.24);
-  --color-how-card-shadow: rgba(28, 31, 36, 0.04);
-  --color-how-card-shadow-hover: rgba(28, 31, 36, 0.08);
+--color-how-step-bg: rgba(46, 166, 255, 0.08);
+--color-how-step-text: #1396ff;
 
-  --color-how-card-title: #22252d;
-  --color-how-card-text: #335a7c;
-   --color-how-bg: #f7f9fc;
+--font-size-how-divider: 14px;
+--font-weight-how-divider: 500;
 
-  --color-how-step-bg: rgba(46, 166, 255, 0.08);
-  --color-how-step-text: #1396ff;
-
-  --font-size-how-eyebrow: 14px;
-  --font-weight-how-eyebrow: 500;
-
-  --font-size-how-title: 36px;
-  --font-weight-how-title: 500;
-  --line-height-how-title: 1.15;
-
-  --font-size-how-subtitle: 18px;
-  --font-weight-how-subtitle: 400;
-  --line-height-how-subtitle: 1.5;
-
-  --font-size-how-divider: 14px;
-  --font-weight-how-divider: 500;
-
-  --font-size-how-card-title: 18px;
-  --font-weight-how-card-title: 500;
-  --line-height-how-card-title: 1.25;
-
-  --font-size-how-card-text: 14px;
-  --font-weight-how-card-text: 400;
-  --line-height-how-card-text: 1.4;
-
-  --font-size-how-step: 20px;
-  --font-weight-how-step: 600;
-  
+--font-size-how-step: 20px;
+--font-weight-how-step: 600;
 }
 
 *,

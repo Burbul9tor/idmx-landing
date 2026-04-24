@@ -27,38 +27,85 @@ const en = {
     ],
   },
 
-  problems: {
-    eyebrow: 'Challenges',
-    title: 'When access management gets out of control',
-    subtitle:
-      'In most companies, access management processes remain fragmented and non-transparent',
-    topCards: [
-      {
-        title: 'Access is granted manually via email requests',
-      },
-      {
-        title: 'Former employees retain access',
-      },
-    ],
-    bottomCards: [
-      {
-        title: 'Approval takes days or even weeks',
-      },
-      {
-        title: 'Audit preparation turns into stress',
-      },
-      {
-        title: 'Access matrices are managed in Excel or missing entirely',
-      },
-      {
-        title: 'There is no unified view of user permissions',
-      },
-    ],
-    resultLabel: 'Result',
-    resultText:
-      'As a result, the company loses control, time, and is exposed to security risks',
-  },
+problems: {
+  eyebrow: 'WHY THIS IS URGENT',
+  title: 'An incident does not warn you — it just happens',
+  subtitle:
+    'Each of these scenarios is not chaos, but a real vulnerability in any company without an IDM system',
 
+  topCards: [
+    {
+      title: 'A former employee still has access',
+      description:
+        'The employee left, but their account in AD is still active. They can log in at any time.',
+    },
+    {
+      title: 'Temporary access becomes permanent',
+      description:
+        'A contractor finished the project, but their access was never revoked. No one even noticed.',
+    },
+  ],
+
+  bottomCards: [
+    {
+      title: 'Access matrix is stored in Excel',
+      description:
+        'The file was updated months ago, does not reflect reality, and provides no real control.',
+    },
+    {
+      title: 'Audit turns into weeks of manual work',
+      description:
+        'Data is collected manually and reconciled across systems. The IT team spends weeks proving the obvious.',
+    },
+    {
+      title: 'No one knows who has access',
+      description:
+        'There is no single view of access rights. Each system is isolated. Incidents may go unnoticed for months.',
+    },
+    {
+      title: 'Access requests are approved via email',
+      description:
+        'Each access grant lacks traceability. Who approved it? When? Why? There is no audit or control.',
+    },
+  ],
+
+  resultLabel: 'WHAT THIS LEADS TO',
+  resultText:
+    'As a result, the company loses control over access, wastes time on manual processes, and increases security risks.',
+},
+solution: {
+  eyebrow: 'КАК РАБОТАЕТ IDMX',
+  title: 'Полная цепочка происхождения каждого доступа',
+  subtitle:
+    'Кто запросил. Кто одобрил. По какому правилу. Когда истекает. IDMX — единый источник правды о доступах во всей инфраструктуре.',
+
+  cards: [
+    {
+      title: 'Видимость без слепых зон',
+      description:
+        'Единый дашборд: кто, в какие системы, на каком основании — в реальном времени. Без выгрузок и запросов в IT.',
+    },
+    {
+      title: 'Снижение attack surface',
+      description:
+        'Автоматический отзыв доступов при увольнении и смене роли. Избыточные привилегии выявляются и устраняются проактивно.',
+    },
+    {
+      title: 'Доказуемость каждого решения',
+      description:
+        'Полный audit trail: кто выдал доступ, кто одобрил, по какому бизнес-правилу. Ответ аудитору — за минуты.',
+    },
+    {
+      title: 'Готовность к аудиту — всегда',
+      description:
+        'Не к проверке, а постоянно. Отчёт о состоянии доступов для регулятора или совета директоров — в несколько кликов.',
+    },
+  ],
+
+  resultLabel: 'Что это даёт',
+  resultText:
+    'Директор ИБ, который может в любой момент ответить «кто имеет доступ, почему и на каком основании» — защищён профессионально и юридически.',
+},
   how: {
     eyebrow: 'How it works?',
     title: 'Access is granted automatically from day one',
@@ -107,33 +154,7 @@ const en = {
     ],
   },
 
-  solution: {
-    eyebrow: 'Solution',
-    title: 'Unified access management system',
-    subtitle:
-      'IDMX is an enterprise Identity Management platform that brings identities, access management, and control together in a single system.',
-    cards: [
-      {
-        title: 'All access is managed from a single system',
-        size: 'solution-card--small',
-      },
-      {
-        title: 'The access matrix becomes transparent and manageable',
-        size: 'solution-card--wide',
-      },
-      {
-        title: 'Access is granted automatically based on rules',
-        size: 'solution-card--wide',
-      },
-      {
-        title: 'Full control over access at every level',
-        size: 'solution-card--small',
-      },
-    ],
-    resultLabel: 'Result',
-    resultText:
-      'IDMX turns chaotic processes into a manageable and controlled system',
-  },
+
   modulesSection: {
   eyebrow: 'Modules',
   title: 'Key platform modules',
