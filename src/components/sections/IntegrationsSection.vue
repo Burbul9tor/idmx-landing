@@ -164,13 +164,13 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useLocale } from '../../composables/useLocale'
-import adIcon from '../../assets/integrations/ad.png'
-import hrIcon from '../../assets/integrations/hr.png'
-import erpIcon from '../../assets/integrations/erp.png'
-import mailIcon from '../../assets/integrations/mail.png'
-import appsIcon from '../../assets/integrations/apps.png'
-import idmxLogo from '../../assets/integrations/idmx_logo.svg'
-import dotIcon from '../../assets/integrations/dot.svg'
+import adIcon from '"@/assets/integrations/ad.png'
+import hrIcon from '"@/assets/integrations/hr.png'
+import erpIcon from '"@/assets/integrations/erp.png'
+import mailIcon from '"@/assets/integrations/mail.png'
+import appsIcon from '"@/assets/integrations/apps.png'
+import idmxLogo from '"@/assets/integrations/idmx_logo.svg'
+import dotIcon from '"@/assets/integrations/dot.svg'
 
 const { t } = useLocale()
 
