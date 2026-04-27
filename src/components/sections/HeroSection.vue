@@ -44,6 +44,21 @@
             </div>
           </div>
         </div>
+        <div class="hero-stats hero-stats--enter">
+  <div
+    v-for="item in t.hero.stats"
+    :key="item.value"
+    class="hero-stat"
+  >
+    <div class="hero-stat__value">
+      {{ item.value }}
+    </div>
+
+    <div class="hero-stat__text">
+      {{ item.text }}
+    </div>
+  </div>
+</div>
       </div>
     </div>
   </section>
@@ -395,6 +410,72 @@ const emit = defineEmits(['open-demo'])
   font-size: var(--font-size-note-text);
   font-weight: var(--font-weight-note-text);
 }
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  width: 100%;
+  max-width: 760px;
+  margin-top: 42px;
+  padding: 28px 32px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(220, 236, 255, 0.12);
+  box-shadow: 0 20px 60px rgba(1, 157, 255, 0.08);
+  backdrop-filter: blur(14px);
+}
+
+.hero-stat {
+  position: relative;
+  padding: 0 28px;
+  text-align: center;
+}
+
+.hero-stat:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 26%;
+  width: 1px;
+  height: 48%;
+  background: rgba(119, 203, 255, 0.18);
+}
+
+.hero-stat__value {
+  margin-bottom: 12px;
+  color: var(--color-primary);
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.hero-stat__text {
+  color: rgba(220, 236, 255, 0.72);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.hero-stats--enter {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(22px);
+  animation: heroStatsEnter 1s cubic-bezier(0.22, 1, 0.36, 1) 1.35s forwards;
+}
+
+@keyframes heroStatsEnter {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(22px);
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
 
 @keyframes heroFadeIn {
   from {
@@ -603,5 +684,33 @@ const emit = defineEmits(['open-demo'])
   .hero-cta-note {
     max-width: 420px;
   }
+  .hero-stats {
+  grid-template-columns: 1fr;
+  max-width: 420px;
+  margin-top: 32px;
+  padding: 24px;
+}
+
+.hero-stat {
+  padding: 20px 0;
+}
+
+.hero-stat:not(:last-child)::after {
+  right: auto;
+  top: auto;
+  left: 50%;
+  bottom: 0;
+  width: 64px;
+  height: 1px;
+  transform: translateX(-50%);
+}
+
+.hero-stat__value {
+  font-size: 40px;
+}
+
+.hero-stat__text {
+  font-size: 15px;
+}
 }
 </style>

@@ -59,10 +59,10 @@ const emit = defineEmits(['open-demo'])
 .final-cta__title {
   margin: 0 0 20px;
   color: var(--white);
-  font-size: var(--font-size-title);
+  font-size: 52px;
   font-weight: 800;
-  line-height: 1.08;
-  letter-spacing: -0.04em;
+  line-height: 1.09;
+  letter-spacing: -0.01em;
 }
 
 .final-cta__subtitle {

@@ -437,7 +437,7 @@ const bottomSteps = computed(() => text.value.how.bottomSteps)
 .how-card__title {
   margin: 0 0 12px;
   color: var(--color-how-card-title);
-  font-size: var(--font-size-how-card-title);
+  font-size: var(--font-size-card-title);
   font-weight: 600;
   line-height: var(--line-height-how-card-title);
 }

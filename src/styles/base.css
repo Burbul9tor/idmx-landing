@@ -19,7 +19,7 @@
     radial-gradient(circle at 85% 20%, rgba(255, 98, 55, 0.10), transparent 30%),
     linear-gradient(180deg, #f7fbff 0%, #ffffff 52%, #f5f8fc 100%);
   --border-top: 1px solid rgba(1, 157, 255, 0.12); 
-  --color-text: #0D1424;
+  --color-text: #1C1F24;
   --color-subtitle:#5a6b82;
   --color-primary: #019dff;
   --color-red:#C01C1C;

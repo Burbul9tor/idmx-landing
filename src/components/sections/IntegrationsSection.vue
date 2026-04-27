@@ -1,10 +1,5 @@
 <template>
-  <section
-    ref="sectionRef"
-    class="integrations"
-    :class="{ 'integrations--visible': isVisible }"
-    id="integrations"
-  >
+  <section class="integrations" id="integrations">
     <div class="container integrations__inner">
       <div class="integrations__head">
         <div class="integrations__eyebrow">
@@ -20,588 +15,500 @@
         </p>
       </div>
 
-      <div class="integrations__scheme">
-        <svg
-          class="integrations__lines"
-          viewBox="0 0 1200 760"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path d="M600 390 L600 125" class="integrations__line integrations__line--top" />
-          <path d="M600 390 L170 335"  class="integrations__line integrations__line--left" />
-          <path d="M600 390 L1000 335" class="integrations__line integrations__line--right" />
-          <path d="M560 390 L120 710" class="integrations__line integrations__line--bottom-left" />
-          <path d="M640 390 L970 630" class="integrations__line integrations__line--bottom-right" />
-          
-        </svg>
-
-        <svg
-          class="integrations__dots-layer"
-          viewBox="0 0 1200 760"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <image
-            :href="dotIcon"
-            x="580"
-            y="170"
-            width="42"
-            height="42"
-            class="integrations__dot integrations__dot--top"
-          />
-          <image
-            :href="dotIcon"
-            x="296"
-            y="335"
-            width="42"
-            height="42"
-            class="integrations__dot integrations__dot--left"
-          />
-          <image
-            :href="dotIcon"
-            x="860"
-            y="333"
-            width="42"
-            height="42"
-            class="integrations__dot integrations__dot--right"
-          />
-          <image
-            :href="dotIcon"
-            x="248"
-            y="585"
-            width="42"
-            height="42"
-            class="integrations__dot integrations__dot--bottom-left"
-          />
-          <image
-            :href="dotIcon"
-            x="910"
-            y="585"
-            width="42"
-            height="42"
-            class="integrations__dot integrations__dot--bottom-right"
-          />
-        </svg>
-
-        <article class="integration-card integration-card--top">
-          <div class="integration-card__icon">
-            <img :src="adIcon" :alt="t.integrations.items.top.title" />
-          </div>
-          <h3 class="integration-card__title">
-            {{ t.integrations.items.top.title }}
-          </h3>
-          <p class="integration-card__text">
-            {{ t.integrations.items.top.text }}
-          </p>
-        </article>
-
-        <article class="integration-card integration-card--left">
-          <div class="integration-card__icon">
-            <img :src="hrIcon" :alt="t.integrations.items.left.title" />
-          </div>
-          <h3 class="integration-card__title">
-            {{ t.integrations.items.left.title }}
-          </h3>
-          <p class="integration-card__text">
-            {{ t.integrations.items.left.text }}
-          </p>
-        </article>
-
-        <article class="integration-card integration-card--right">
-          <div class="integration-card__icon">
-            <img :src="erpIcon" :alt="t.integrations.items.right.title" />
-          </div>
-          <h3 class="integration-card__title">
-            {{ t.integrations.items.right.title }}
-          </h3>
-          <p class="integration-card__text">
-            {{ t.integrations.items.right.text }}
-          </p>
-        </article>
-
-        <article class="integration-card integration-card--bottom-left">
-          <div class="integration-card__icon">
-            <img :src="mailIcon" :alt="t.integrations.items.bottomLeft.title" />
-          </div>
-          <h3 class="integration-card__title">
-            {{ t.integrations.items.bottomLeft.title }}
-          </h3>
-          <p class="integration-card__text">
-            {{ t.integrations.items.bottomLeft.text }}
-          </p>
-        </article>
-
-        <article class="integration-card integration-card--bottom-right">
-          <div class="integration-card__icon">
-            <img :src="appsIcon" :alt="t.integrations.items.bottomRight.title" />
-          </div>
-          <h3 class="integration-card__title">
-            {{ t.integrations.items.bottomRight.title }}
-          </h3>
-          <p class="integration-card__text">
-            {{ t.integrations.items.bottomRight.text }}
-          </p>
-        </article>
-
-        <article class="integration-card integration-card--center integration-card--featured">
-          <div class="integration-card__icon integration-card__icon--center">
+      <div class="integrations__body">
+        <!-- ЦЕНТР -->
+        <article class="integrations__hub">
+          <div class="integrations__hub-logo">
             <img :src="idmxLogo" alt="IDMX" />
           </div>
 
-          <h3 class="integration-card__title integration-card__title--center">
+          <h3 class="integrations__hub-title">
             {{ t.integrations.center.title }}
           </h3>
 
-          <p class="integration-card__text integration-card__text--center">
+          <p class="integrations__hub-text">
             {{ t.integrations.center.text }}
           </p>
+
+          <div class="integrations__hub-badge">
+            Single point of access control
+          </div>
         </article>
+
+        <!-- КАРТОЧКИ -->
+        <div class="integrations__list">
+          <!-- AD -->
+          <article class="integration-card">
+            <div class="integration-card__icon">
+              <img :src="adIcon" :alt="t.integrations.items.top.title" />
+            </div>
+            <div>
+              <h3>{{ t.integrations.items.top.title }}</h3>
+              <p>{{ t.integrations.items.top.text }}</p>
+            </div>
+          </article>
+
+          <!-- HR -->
+          <article class="integration-card">
+            <div class="integration-card__icon">
+              <img :src="hrIcon" :alt="t.integrations.items.left.title" />
+            </div>
+            <div>
+              <h3>{{ t.integrations.items.left.title }}</h3>
+              <p>{{ t.integrations.items.left.text }}</p>
+            </div>
+          </article>
+
+          <!-- ERP -->
+          <article class="integration-card">
+            <div class="integration-card__icon">
+              <img :src="erpIcon" :alt="t.integrations.items.right.title" />
+            </div>
+            <div>
+              <h3>{{ t.integrations.items.right.title }}</h3>
+              <p>{{ t.integrations.items.right.text }}</p>
+            </div>
+          </article>
+
+          <!-- MAIL -->
+          <article class="integration-card">
+            <div class="integration-card__icon">
+              <img :src="mailIcon" :alt="t.integrations.items.bottomLeft.title" />
+            </div>
+            <div>
+              <h3>{{ t.integrations.items.bottomLeft.title }}</h3>
+              <p>{{ t.integrations.items.bottomLeft.text }}</p>
+            </div>
+          </article>
+
+          <!-- APPS (ГЛАВНОЕ ИЗМЕНЕНИЕ) -->
+          <article class="integration-card integration-card--apps">
+            
+            <div class="integration-card__apps-image">
+              <img :src="appsIcon" :alt="t.integrations.items.bottomRight.title" />
+            </div>
+
+            <h3>
+              {{ t.integrations.items.bottomRight.title }}
+            </h3>
+
+            <p>
+              {{ t.integrations.items.bottomRight.text }}
+            </p>
+
+          </article>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useLocale } from '../../composables/useLocale'
+
 import adIcon from '@/assets/integrations/ad.png'
 import hrIcon from '@/assets/integrations/hr.png'
 import erpIcon from '@/assets/integrations/erp.png'
 import mailIcon from '@/assets/integrations/mail.png'
 import appsIcon from '@/assets/integrations/apps.png'
 import idmxLogo from '@/assets/integrations/idmx_logo.svg'
-import dotIcon from '@/assets/integrations/dot.svg'
 
 const { t } = useLocale()
-
-const sectionRef = ref<HTMLElement | null>(null)
-const isVisible = ref(false)
-
-let observer: IntersectionObserver | null = null
-
-onMounted(() => {
-  observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        isVisible.value = true
-        observer?.disconnect()
-      }
-    },
-    { threshold: 0.2 }
-  )
-
-  if (sectionRef.value) {
-    observer.observe(sectionRef.value)
-  }
-})
-
-onBeforeUnmount(() => {
-  observer?.disconnect()
-})
-
-const text = computed(() => t.value)
-void text
 </script>
 
 <style scoped>
 .integrations {
+  position: relative;
   padding: 120px 0;
-  background: var(--background-block);
+  overflow: hidden;
+  background: var(--background-dark);
+  border-top: 1px solid rgba(0, 157, 255, 0.12);
+}
+
+.integrations::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 40%, rgba(1, 157, 255, 0.16), transparent 34%),
+    radial-gradient(circle at 80% 55%, rgba(119, 203, 255, 0.08), transparent 30%);
+  pointer-events: none;
 }
 
 .integrations__inner {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 56px;
 }
 
 .integrations__head {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .integrations__eyebrow {
   position: relative;
-  display: inline-flex;
-  justify-content: center;
+  display: inline-block;
   margin-bottom: 20px;
-  color: #2b2f36;
-  font-size: 14px;
-  font-weight: 500;
+  color: var(--white);
+  font-size: var(--font-size-eyebrow);
+  font-weight: 700;
   line-height: 1.2;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .integrations__eyebrow::after {
   content: '';
   position: absolute;
-  left: 50%;
-  bottom: -8px;
-  width: 112px;
+  left: 0;
+  bottom: -10px;
+  width: 100%;
   height: 2px;
   border-radius: 999px;
-  background: #2ea6ff;
-  transform: translateX(-50%);
+  background: var(--color-primary);
 }
 
 .integrations__title {
-  margin: 0 0 14px;
-  max-width: 980px;
-  color: #22252d;
-  font-size: 36px;
-  font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  margin: 0 0 18px;
+  max-width: 1100px;
+  color: var(--white);
+  font-size: var(--font-size-title);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
 }
 
 .integrations__subtitle {
   margin: 0;
-  max-width: 860px;
-  color: #66788a;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 1.5;
+  max-width: 960px;
+  color: rgba(220, 236, 255, 0.72);
+  font-size: var(--font-size-subtitle);
+  line-height: 1.55;
 }
 
-.integrations__scheme {
+.integrations__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 1.18fr) minmax(0, 1fr);
+  grid-template-areas:
+    "ad hub hr"
+    "erp hub mail"
+    "apps apps apps";
+  gap: 22px;
+  align-items: stretch;
+}
+
+.integrations__hub {
+  grid-area: hub;
   position: relative;
-  min-height: 820px;
+  z-index: 2;
+  min-height: 100%;
+  padding: 44px;
+  border-radius: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background:
+    radial-gradient(circle at 50% 10%, rgba(1, 157, 255, 0.22), transparent 52%),
+    rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(1, 157, 255, 0.22);
+  box-shadow: 0 0 40px rgba(1,157,255,0.12);
+  cursor: pointer;
 }
 
-.integrations__lines,
-.integrations__dots-layer {
+.integrations__hub::before {
+  content: '';
   position: absolute;
-  inset: 0;
+  inset: -60px;
+  z-index: -1;
+  border-radius: 40px;
+  background: radial-gradient(circle, rgba(1, 157, 255, 0.18), transparent 70%);
+  filter: blur(60px);
+}
+
+.integrations__hub-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 34px;
+}
+
+.integrations__hub-logo img {
+  width: 260px;
+  max-width: 100%;
+  max-height: 96px;
+}
+
+.integrations__hub-title {
+  margin: 0 0 18px;
+  max-width: 340px;
+  color: var(--white);
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.12;
+}
+
+.integrations__hub-text {
+  margin: 0;
+  max-width: 350px;
+  color: rgba(220, 236, 255, 0.74);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.integrations__hub-badge {
+  display: inline-flex;
+  margin-top: 36px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  color: rgba(220, 236, 255, 0.86);
+  font-size: 13px;
+  font-weight: 700;
+  background: rgba(1, 157, 255, 0.12);
+  border: 1px solid rgba(1, 157, 255, 0.2);
+}
+
+.integrations__list {
+  display: contents;
+}
+
+.integration-card:nth-child(1) {
+  grid-area: ad;
+}
+
+.integration-card:nth-child(2) {
+  grid-area: hr;
+}
+
+.integration-card:nth-child(3) {
+  grid-area: erp;
+}
+
+.integration-card:nth-child(4) {
+  grid-area: mail;
+}
+
+
+.integration-card__apps-image {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   width: 100%;
-  height: 100%;
-  overflow: visible;
-  pointer-events: none;
-}
+  max-width: 420px;
+  margin-bottom: 16px;
+  padding: 12px;
+  border-radius: 58px;
 
-.integrations__lines {
-  z-index: 1;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
 }
-
-.integrations__dots-layer {
-  z-index: 4;
+.integration-card__apps-image img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+   filter:
+    grayscale(100%)
+    brightness(0.85)
+    contrast(1.1)
+    sepia(1)
+    hue-rotate(180deg)
+    saturate(1.2);
+  transition: all 0.3s ease;
+  opacity: 0.7;
+  display: block;
 }
-
-.integrations__line {
-  fill: none;
-  stroke: rgba(46, 166, 255, 0.22);
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-dasharray: 500;
-  stroke-dashoffset: 500;
-}
-
-.integrations--visible .integrations__line {
-  animation: drawLine 1s ease forwards;
-}
-
-.integrations--visible .integrations__line--top {
-  animation-delay: 0.15s;
-}
-
-.integrations--visible .integrations__line--left {
-  animation-delay: 0.28s;
-}
-
-.integrations--visible .integrations__line--right {
-  animation-delay: 0.4s;
-}
-
-.integrations--visible .integrations__line--bottom-left {
-  animation-delay: 0.52s;
-}
-
-.integrations--visible .integrations__line--bottom-right {
-  animation-delay: 0.64s;
-}
-
-.integrations__dot {
-  fill: #2ea6ff;
-  opacity: 0;
-  transform-box: fill-box;
-  transform-origin: center;
-  filter: drop-shadow(0 0 0 rgba(46, 166, 255, 0.3))
-    drop-shadow(0 6px 14px rgba(46, 166, 255, 0.1));
-}
-
-.integrations--visible .integrations__dot {
-  animation: dotReveal 0.4s ease forwards;
-}
-
-.integrations--visible .integrations__dot--top {
-  animation-delay: 0.25s;
-}
-
-.integrations--visible .integrations__dot--left {
-  animation-delay: 0.38s;
-}
-
-.integrations--visible .integrations__dot--right {
-  animation-delay: 0.5s;
-}
-
-.integrations--visible .integrations__dot--bottom-left {
-  animation-delay: 0.62s;
-}
-
-.integrations--visible .integrations__dot--bottom-right {
-  animation-delay: 0.74s;
+.integration-card--apps:hover .integration-card__apps-image img {
+  filter: none;
+  opacity: 1;
+  cursor: pointer;
 }
 
 .integration-card {
-  position: absolute;
-  z-index: 3;
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 18px;
+  align-items: flex-start;
+  min-height: 190px;
+  padding: 28px;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(220, 236, 255, 0.1);
+  box-shadow: var(--shadow-card);
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+.integration-card--apps {
+  grid-area: apps;
+  width: 100%;
+  justify-self: stretch;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  border-radius: 22px;
-  border: 1px solid rgba(46, 166, 255, 0.12);
-  background: #eef7ff;
-  box-shadow: 0 10px 30px rgba(28, 31, 36, 0.04);
-  opacity: 0;
-  transform: translateY(24px);
-  transition:
-    opacity 0.65s ease,
-    transform 0.65s ease,
-    box-shadow 0.25s ease,
-    border-color 0.25s ease;
-}
 
-.integrations--visible .integration-card {
-  opacity: 1;
-  transform: translateY(0);
+  min-height: auto;
+   padding: 24px 56px 24px;
+
+  background:
+    radial-gradient(circle at 50% 0%, rgba(1,157,255,0.15), transparent 60%),
+    rgba(255,255,255,0.05);
+
+  border-color: rgba(1,157,255,0.25);
 }
 
 .integration-card:hover {
-  box-shadow: 0 18px 38px rgba(28, 31, 36, 0.08);
-  border-color: rgba(46, 166, 255, 0.24);
-}
+  transform: translateY(-4px);
+  border-color: rgba(1, 157, 255, 0.35);
+  box-shadow: 0 10px 30px rgba(1, 157, 255, 0.15);
+  cursor: pointer;
 
-.integration-card--top {
-  top: 0px;
-  left: 50%;
-  width: 300px;
-  min-height: 200px;
-  padding: 24px 20px;
-  transform: translateX(-50%) translateY(24px);
-}
-
-.integrations--visible .integration-card--top {
-  transform: translateX(-50%) translateY(0);
-}
-
-.integration-card--left {
-  top: 280px;
-  left: 20px;
-  width: 300px;
-  min-height: 200px;
-  padding: 24px 20px;
-}
-
-.integration-card--right {
-  top: 288px;
-  right: 20px;
-  width: 300px;
-  min-height: 20px;
-  padding: 24px 20px;
-}
-
-.integration-card--bottom-left {
-  bottom: -40px;
-  left: 120px;
-  width: 300px;
-  min-height: 210px;
-   max-height: 210px;
-  padding: 24px 20px;
-}
-
-.integration-card--bottom-right {
-  bottom: -40px;
-  right: 120px;
-  width: 300px;
-  min-height: 210px;
-  max-height: 210px;
-  padding: 24px 20px;
-}
-
-.integration-card--center {
-  top: 300px;
-  left: 50%;
-  width: 384px;
-  min-height: 262px;
-  padding: 16px 16px 16px;
-  transform: translateX(-50%) translateY(24px);
-}
-
-.integrations--visible .integration-card--center {
-  transform: translateX(-50%) translateY(0);
 }
 
 .integration-card__icon {
+  position: relative;
+  width: 72px;
+  height: 72px;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 56px;
-  margin-bottom: 8px;
+}
+
+.integration-card__icon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: rgba(1, 157, 255, 0.1);
+  border: 1px solid rgba(1, 157, 255, 0.14);
+}
+
+.integration-card__icon::after {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  border-radius: 24px;
+  background: radial-gradient(circle, rgba(1, 157, 255, 0.18), transparent 70%);
+  filter: blur(14px);
+  opacity: 0.7;
 }
 
 .integration-card__icon img {
-  display: block;
-  max-width: 56px;
-  max-height: 56px;
-  width: auto;
-  height: auto;
+  position: relative;
+  z-index: 1;
+  max-width: 58px;
+  max-height: 58px;
 }
 
-/* Центр: твой логотип / твоя иконка */
-.integration-card__icon--center {
-  height: 88px;
-  margin-bottom: 0px;
+.integration-card h3 {
+  margin: 0 0 10px;
+  color: var(--white);
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.22;
+  letter-spacing: -0.03em;
 }
 
-.integration-card__icon--center img {
-  max-width: 180px;
-  max-height: 80px;
+.integration-card--apps h3 {
+  margin-bottom: 10px;
+  font-size: 28px;
 }
 
-.integration-card__title {
-  margin: 0 0 12px;
-  color: #22252d;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.25;
-}
-
-.integration-card__title--center {
-  font-size: 18px;
-}
-
-.integration-card__text {
+.integration-card p {
   margin: 0;
-  color: #335a7c;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.4;
-}
-
-.integration-card__text--center {
-  max-width: 260px;
-}
-
-@keyframes drawLine {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes dotReveal {
-  from {
-    opacity: 0;
-    transform: scale(0.6);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  color: rgba(220, 236, 255, 0.72);
+  font-size: 15px;
+  line-height: 1.55;
 }
 
 @media (max-width: 1180px) {
-  .integrations__scheme {
+  .integrations__body {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "hub"
+      "ad"
+      "hr"
+      "erp"
+      "mail"
+      "apps";
+  }
+
+  .integrations__hub {
     min-height: auto;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
-      min-height: 920px;
   }
 
-  .integrations__lines,
-  .integrations__dots-layer {
-    display: none;
+  .integrations__hub-title,
+  .integrations__hub-text {
+    max-width: 680px;
   }
 
-  .integration-card {
-    position: relative;
-    inset: auto;
+  .integration-card--apps {
     width: 100%;
-    min-height: auto;
-    transform: none;
-  }
-
-  .integrations--visible .integration-card,
-  .integrations--visible .integration-card--top,
-  .integrations--visible .integration-card--center {
-    transform: none;
-  }
-
-  .integration-card--center {
-    order: 1;
-    grid-column: 1 / -1;
-  }
-
-  .integration-card--top {
-    order: 2;
-    grid-column: 1 / -1;
-    justify-self: center;
-    max-width: 360px;
-  }
-
-  .integration-card--left {
-    order: 3;
-  }
-
-  .integration-card--right {
-    order: 4;
-  }
-
-  .integration-card--bottom-left {
-    order: 5;
-  }
-
-  .integration-card--bottom-right {
-    order: 6;
-    
-    
   }
 }
 
 @media (max-width: 768px) {
   .integrations {
-    padding: 88px 0;
+    padding: 72px 0;
+  }
+
+  .integrations__inner {
+    gap: 36px;
   }
 
   .integrations__title {
-    font-size: 30px;
+    font-size: 36px;
+    line-height: 1.08;
   }
 
   .integrations__subtitle {
     font-size: 16px;
   }
 
-  .integrations__scheme {
-    grid-template-columns: 1fr;
+  .integrations__hub,
+  .integration-card {
+    padding: 24px;
+    border-radius: 22px;
   }
 
-  .integration-card--top,
-  .integration-card--center {
-    max-width: none;
+  .integrations__hub-logo img {
+    width: 210px;
+    max-height: 82px;
   }
 
-  .integration-card__title--center {
-    font-size: 22px;
+  .integrations__hub-title {
+    font-size: 28px;
   }
 
-  .integration-card__icon--center img {
-    max-width: 160px;
-    max-height: 72px;
+  .integration-card {
+    grid-template-columns: 60px 1fr;
+    gap: 16px;
+    min-height: auto;
+  }
+
+  .integration-card__icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .integration-card__icon img {
+    max-width: 48px;
+    max-height: 48px;
+  }
+
+  .integration-card h3 {
+    font-size: 18px;
   }
 }
 </style>

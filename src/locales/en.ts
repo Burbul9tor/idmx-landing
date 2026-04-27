@@ -25,6 +25,20 @@ const en = {
       'Visibility and control at the business level',
       'Reduced workload for IT and security teams',
     ],
+    stats: [
+  {
+    value: '70%',
+    text: 'успешных атак — через уязвимости в доступах и конфигурации',
+  },
+  {
+    value: '42%',
+    text: 'организаций не знают, сколько у них «мёртвых» аккаунтов',
+  },
+  {
+    value: '3+ дня',
+    text: 'средняя задержка блокировки уволенных в компаниях без IDM',
+  },
+],
   },
 
 problems: {

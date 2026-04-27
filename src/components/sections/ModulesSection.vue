@@ -265,7 +265,6 @@ onBeforeUnmount(() => {
   font-size: var(--font-size-title);
   font-weight: 800;
   line-height: 1.08;
-  letter-spacing: -0.04em;
 }
 
 .modules__description {

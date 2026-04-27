@@ -167,7 +167,6 @@ const cards = computed(() =>
   font-size: var(--font-size-title);
   font-weight: 800;
   line-height: 1.08;
-  letter-spacing: -0.04em;
 }
 
 .solution__subtitle {
@@ -211,9 +210,9 @@ const cards = computed(() =>
   max-width: 100%;
   color: var(--white);
   font-size: var(--font-size-card-title);
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.22;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.01em;
 }
 
 .solution-card__description {

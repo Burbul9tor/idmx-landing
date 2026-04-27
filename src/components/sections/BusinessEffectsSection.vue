@@ -121,12 +121,11 @@ const getIcon = (icon: string) => iconMap[icon] || loadIcon
 
 .effects__title {
   margin: 0 0 14px;
-  max-width: 800px;
+  max-width: 900px;
   color: var(--color-text);
   font-size: var(--font-size-title);
   font-weight: 800;
   line-height: 1.08;
-  letter-spacing: -0.04em;
 }
 
 .effects__subtitle {

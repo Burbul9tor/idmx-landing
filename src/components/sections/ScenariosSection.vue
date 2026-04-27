@@ -17,26 +17,24 @@
 
       <div class="scenarios__layout">
         <div class="scenarios__list">
-        <button
+          <button
             v-for="(item, index) in scenarios"
             :key="item.title"
             type="button"
             class="scenario-card"
             :class="{ 'scenario-card--active': activeIndex === index }"
             @click="setActive(index)"
-            >
-            <div class="scenario-card__top">
+          >
             <div class="scenario-card__icon">
-                <img :src="item.icon" :alt="item.title" />
-            </div>
+              <img :src="item.icon" :alt="item.title" />
             </div>
 
             <div class="scenario-card__body">
-            <h3 class="scenario-card__title">
+              <h3 class="scenario-card__title">
                 {{ item.title }}
-            </h3>
+              </h3>
             </div>
-        </button>
+          </button>
         </div>
 
         <div class="scenarios__preview">
@@ -58,7 +56,9 @@
                     class="scenario-step"
                   >
                     <div class="scenario-step__dot">
-                      <img :src="getStepIcon(step.icon)" :alt="step.title" />
+                      <span class="scenario-step__number">
+                        {{ index + 1 }}
+                      </span>
                     </div>
 
                     <div class="scenario-step__content">
@@ -139,17 +139,14 @@ import contractorsIcon from '../../assets/scenarios/scenario-contractors.png'
 import auditIcon from '../../assets/scenarios/scenario-audit.png'
 import criticalIcon from '../../assets/scenarios/scenario-critical.png'
 
-import createIcon from '../../assets/scenarios/step-create.png'
-import rulesIcon from '../../assets/scenarios/step-rules.png'
-import approveIcon from '../../assets/scenarios/step-approve.png'
-import accessIcon from '../../assets/scenarios/step-access.png'
-import syncIcon from '../../assets/scenarios/step-sync.png'
-import controlIcon from '../../assets/scenarios/step-control.png'
-
 type ScenarioStep = {
-  icon: string
   title: string
   text: string
+}
+
+type ScenarioExtra = {
+  effect: string
+  application: string
 }
 
 type Scenario = {
@@ -161,10 +158,7 @@ type Scenario = {
     value: string
     text: string
   }
-  extra: {
-    effect: string
-    application: string
-  }
+  extra: ScenarioExtra
   steps: ScenarioStep[]
   icon: string
 }
@@ -187,6 +181,10 @@ type LocaleScenarioItem = {
 
 type LocaleValue = {
   scenariosSection?: {
+    labels?: {
+      effect?: string
+      application?: string
+    }
     items?: LocaleScenarioItem[]
   }
 }
@@ -201,15 +199,6 @@ const scenarioIcons = [
   auditIcon,
   criticalIcon,
 ] as const
-
-const stepIconMap: Record<string, string> = {
-  create: createIcon,
-  rules: rulesIcon,
-  approve: approveIcon,
-  access: accessIcon,
-  sync: syncIcon,
-  control: controlIcon,
-}
 
 const fallbackScenario: Scenario = {
   title: '',
@@ -227,8 +216,6 @@ const fallbackScenario: Scenario = {
   steps: [],
   icon: scenarioIcons[0],
 }
-
-const getStepIcon = (icon: string) => stepIconMap[icon] || createIcon
 
 const localeScenarios = computed(() => {
   const localeValue = t.value as unknown as LocaleValue
@@ -265,65 +252,64 @@ const setActive = (index: number) => {
 
 <style scoped>
 .scenarios {
+  position: relative;
   padding: 120px 0;
+  overflow: hidden;
   background: var(--background-block);
 }
 
 .scenarios__inner {
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 56px;
 }
 
 .scenarios__head {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .scenarios__eyebrow {
   position: relative;
-  display: inline-flex;
-  justify-content: center;
+  display: inline-block;
   margin-bottom: 20px;
-  color: #2b2f36;
-  font-size: 14px;
-  font-weight: 500;
+  color: var(--color-text);
+  font-size: var(--font-size-eyebrow);
+  font-weight: 700;
   line-height: 1.2;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .scenarios__eyebrow::after {
   content: '';
   position: absolute;
-  left: 50%;
-  bottom: -8px;
-  width: 112px;
+  left: 0;
+  bottom: -10px;
+  width: 100%;
   height: 2px;
   border-radius: 999px;
-  background: #2ea6ff;
-  transform: translateX(-50%);
+  background: var(--color-primary);
 }
 
 .scenarios__title {
-  margin: 0 0 14px;
-  max-width: 980px;
-  color: #22252d;
-  font-size: 36px;
-  font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  margin: 0 0 18px;
+  max-width: 1100px;
+  color: var(--color-text);
+  font-size: var(--font-size-title);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
 }
 
 .scenarios__subtitle {
   margin: 0;
-  max-width: 860px;
-  color: #66788a;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 1.5;
+  max-width: 960px;
+  color: var(--color-subtitle);
+  font-size: var(--font-size-subtitle);
+  line-height: 1.55;
 }
 
 .scenarios__layout {
@@ -342,13 +328,13 @@ const setActive = (index: number) => {
 .scenario-card {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   width: 100%;
   padding: 22px;
-  border: 1px solid rgba(46, 166, 255, 0.12);
+  border: 1px solid var(--color-border);
   border-radius: 24px;
   background: var(--white);
-  box-shadow: 0 10px 30px rgba(28, 31, 36, 0.04);
+  box-shadow: var(--shadow-card);
   text-align: left;
   cursor: pointer;
   transition:
@@ -360,43 +346,57 @@ const setActive = (index: number) => {
 
 .scenario-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(46, 166, 255, 0.24);
-  box-shadow: 0 18px 38px rgba(28, 31, 36, 0.08);
+  border-color: rgba(1, 157, 255, 0.25);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .scenario-card--active {
-  border-color: rgba(46, 166, 255, 0.28);
-  background: linear-gradient(
-    180deg,
-    rgba(235, 246, 255, 0.98),
-    rgba(227, 242, 255, 0.92)
-  );
-  box-shadow: 0 18px 40px rgba(46, 166, 255, 0.12);
+  border-color: rgba(1, 157, 255, 0.38);
+  background:
+    linear-gradient(90deg, rgba(1, 157, 255, 0.12), rgba(255, 255, 255, 0.96) 42%),
+    var(--white);
+  box-shadow: 0 18px 44px rgba(1, 157, 255, 0.16);
 }
 
-.scenario-card__top {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-  flex-shrink: 0;
+.scenario-card--active .scenario-card__icon {
+  background: rgba(1, 157, 255, 0.14);
+  border-color: rgba(1, 157, 255, 0.28);
+}
+
+.scenario-card--active .scenario-card__title {
+  color: var(--color-primary);
 }
 
 .scenario-card__icon {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 64px;
   height: 64px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.78);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  flex-shrink: 0;
+  border-radius: 20px;
+  background: rgba(1, 157, 255, 0.08);
+  border: 1px solid rgba(1, 157, 255, 0.12);
+}
+
+.scenario-card__icon::after {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  border-radius: 24px;
+  background: radial-gradient(circle, rgba(1, 157, 255, 0.14), transparent 70%);
+  filter: blur(14px);
+  opacity: 0.75;
+  z-index: 0;
 }
 
 .scenario-card__icon img {
+  position: relative;
+  z-index: 1;
   display: block;
-  max-width: 36px;
-  max-height: 36px;
+  max-width: 40px;
+  max-height: 40px;
   object-fit: contain;
 }
 
@@ -409,10 +409,11 @@ const setActive = (index: number) => {
 
 .scenario-card__title {
   margin: 0;
-  color: #20476b;
-  font-size: 17px;
-  font-weight: 700;
-  line-height: 1.4;
+  color: var(--color-text);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
 }
 
 .scenarios__preview {
@@ -421,34 +422,54 @@ const setActive = (index: number) => {
 
 .scenario-preview {
   display: block;
-  height: auto;
+  height: 100%;
 }
 
 .scenario-preview__screen {
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: unset;
+  min-height: 100%;
   padding: 32px;
-  border: 1px solid rgba(46, 166, 255, 0.14);
+  border: 1px solid var(--color-border);
   border-radius: 28px;
   background: var(--white);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
+}
+
+.scenario-preview__screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(1, 157, 255, 0.1), transparent 36%),
+    radial-gradient(circle at 100% 100%, rgba(119, 203, 255, 0.08), transparent 34%);
+  pointer-events: none;
+}
+
+.scenario-preview__title,
+.scenario-preview__text,
+.scenario-preview__flow,
+.scenario-preview__footer,
+.scenario-preview__extra {
+  position: relative;
+  z-index: 1;
 }
 
 .scenario-preview__title {
   margin: 0 0 12px;
-  color: #22252d;
+  color: var(--color-text);
   font-size: 28px;
   font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
 }
 
 .scenario-preview__text {
   margin: 0 0 28px;
   max-width: 720px;
-  color: #5e7388;
+  color: var(--color-subtitle);
   font-size: 16px;
   line-height: 1.55;
 }
@@ -468,24 +489,22 @@ const setActive = (index: number) => {
 }
 
 .scenario-step__dot {
-  position: relative;
-  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 52px;
-  height: 52px;
+  width: 54px;
+  height: 54px;
   flex-shrink: 0;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.88);
-  box-shadow: 0 10px 24px rgba(46, 166, 255, 0.12);
+  border-radius: 50%;
+  background: rgba(1, 157, 255, 0.08);
+  border: 1px solid rgba(1, 157, 255, 0.18);
 }
 
-.scenario-step__dot img {
-  display: block;
-  max-width: 26px;
-  max-height: 26px;
-  object-fit: contain;
+.scenario-step__number {
+  color: var(--color-primary);
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .scenario-step__content {
@@ -494,29 +513,30 @@ const setActive = (index: number) => {
 
 .scenario-step__title {
   margin-bottom: 6px;
-  color: #20476b;
+  color: var(--color-text);
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.35;
+  letter-spacing: -0.02em;
 }
 
 .scenario-step__text {
-  color: #4f6477;
+  color: var(--color-subtitle);
   font-size: 14px;
   line-height: 1.5;
 }
 
 .scenario-step__line {
   position: absolute;
-  left: 25px;
-  top: 56px;
+  left: 26px;
+  top: 58px;
   bottom: -18px;
   width: 2px;
   border-radius: 999px;
   background: linear-gradient(
     180deg,
-    rgba(46, 166, 255, 0.3),
-    rgba(46, 166, 255, 0.08)
+    rgba(1, 157, 255, 0.28),
+    rgba(1, 157, 255, 0.06)
   );
 }
 
@@ -529,7 +549,7 @@ const setActive = (index: number) => {
 .scenario-preview__metric {
   position: relative;
   padding: 20px;
-  border: 1px solid rgba(46, 166, 255, 0.12);
+  border: 1px solid rgba(1, 157, 255, 0.14);
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.72);
   overflow: hidden;
@@ -541,10 +561,16 @@ const setActive = (index: number) => {
   inset: 0;
   background: radial-gradient(
     circle at 20% 30%,
-    rgba(34, 157, 255, 0.18),
+    rgba(1, 157, 255, 0.16),
     transparent 60%
   );
   pointer-events: none;
+}
+
+.scenario-preview__metric-value,
+.scenario-preview__metric-text {
+  position: relative;
+  z-index: 1;
 }
 
 .scenario-preview__metric-value {
@@ -552,14 +578,14 @@ const setActive = (index: number) => {
   font-size: 32px;
   font-weight: 800;
   line-height: 1;
-  background: linear-gradient(135deg, #019DFF, #4899cc);
+  background: linear-gradient(135deg, #019dff, #36b1ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.02em;
 }
 
 .scenario-preview__metric-text {
-  color: #4f6477;
+  color: var(--color-subtitle);
   font-size: 14px;
   line-height: 1.45;
 }
@@ -573,31 +599,31 @@ const setActive = (index: number) => {
 
 .scenario-preview__extra-item {
   padding: 16px;
-  border: 1px solid rgba(46, 166, 255, 0.12);
+  border: 1px solid rgba(1, 157, 255, 0.12);
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.68);
 }
 
 .scenario-preview__extra-label {
   margin-bottom: 6px;
-  color: #7a8ea3;
+  color: var(--color-subtitle);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.2;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .scenario-preview__extra-value {
-  color: #20476b;
+  color: var(--color-text);
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.45;
 }
 
 .scenario-preview__extra-value--small {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .scenario-fade-enter-active,
@@ -619,29 +645,65 @@ const setActive = (index: number) => {
 
 @media (max-width: 768px) {
   .scenarios {
-    padding: 88px 0;
+    padding: 72px 0;
+  }
+
+  .scenarios__inner {
+    gap: 36px;
+  }
+
+  .scenarios__eyebrow {
+    margin-bottom: 18px;
+    font-size: 12px;
+    line-height: 1.2;
   }
 
   .scenarios__title {
-    font-size: 30px;
+    margin-bottom: 12px;
+    max-width: 100%;
+    font-size: 36px;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
   }
 
   .scenarios__subtitle {
+    max-width: 100%;
     font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .scenarios__layout {
+    gap: 24px;
+  }
+
+  .scenarios__list {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 4px 0 12px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .scenarios__list::-webkit-scrollbar {
+    display: none;
   }
 
   .scenario-card {
-    padding: 18px;
+    flex: 0 0 240px;
+    scroll-snap-align: start;
+    padding: 16px;
     border-radius: 20px;
   }
 
   .scenario-card__icon {
-    width: 56px;
-    height: 56px;
+    width: 52px;
+    height: 52px;
   }
 
   .scenario-card__title {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .scenario-preview__screen {
@@ -665,6 +727,10 @@ const setActive = (index: number) => {
   .scenario-step__dot {
     width: 46px;
     height: 46px;
+  }
+
+  .scenario-step__number {
+    font-size: 16px;
   }
 
   .scenario-step__line {
