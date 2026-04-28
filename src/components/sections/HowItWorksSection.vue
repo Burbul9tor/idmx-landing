@@ -29,7 +29,8 @@
             :style="{ transitionDelay: `${0.35 + index * 0.18}s` }"
           >
             <div class="how-card__icon">
-              <img :src="item.icon" :alt="item.title" />
+              <img :src="item.icon" :alt="item.title" loading="lazy"
+                decoding="async" />
             </div>
 
             <h3 class="how-card__title">

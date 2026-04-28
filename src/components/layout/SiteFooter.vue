@@ -65,7 +65,7 @@
       <!-- BOTTOM -->
       <div class="footer__bottom">
         <div class="footer__copyright">
-          {{ t.footer.copyright }}
+          © {{ new Date().getFullYear() }}{{ t.footer.copyright }}
         </div>
 
         <div class="footer__legal">

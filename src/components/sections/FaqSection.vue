@@ -220,6 +220,7 @@ const toggleItem = (index: number) => {
   line-height: 1.8;
   background: rgba(255, 255, 255, 0.03);
   border-top: 1px solid rgba(220, 236, 255, 0.08);
+  white-space: pre-line;
 }
 
 .faq-content-enter-active,

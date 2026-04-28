@@ -22,109 +22,137 @@
           </svg>
         </button>
 
-        <div class="demo-modal__head">
-          <h3 class="demo-modal__title">
-            {{ t.demoModal.title }}
-          </h3>
+        <template v-if="!isSuccess">
+          <div class="demo-modal__head">
+            <h3 class="demo-modal__title">
+              {{ t.demoModal.title }}
+            </h3>
 
-          <p class="demo-modal__subtitle">
-            {{ t.demoModal.subtitle }}
-          </p>
-        </div>
+            <p class="demo-modal__subtitle">
+              {{ t.demoModal.subtitle }}
+            </p>
+          </div>
 
-        <form class="demo-modal__form" @submit.prevent="submit">
-          <div class="demo-modal__grid">
-            <div class="demo-field">
-              <input
-                v-model.trim="form.firstName"
-                type="text"
-                class="demo-field__input"
-                :placeholder="t.demoModal.fields.firstName"
-              />
-            </div>
+          <form class="demo-modal__form" @submit.prevent="submit" novalidate>
+            <div class="demo-modal__grid">
+              <div class="demo-field">
+                <input
+                  v-model.trim="form.firstName"
+                  type="text"
+                  class="demo-field__input"
+                  :class="{ 'demo-field__input--error': errors.firstName }"
+                  :placeholder="t.demoModal.fields.firstName"
+                  @input="errors.firstName = false"
+                />
+                <div v-if="errors.firstName" class="demo-field__error">
+                  {{ t.demoModal.errors.required }}
+                </div>
+              </div>
 
-            <div class="demo-field">
-              <input
-                v-model.trim="form.lastName"
-                type="text"
-                class="demo-field__input"
-                :placeholder="t.demoModal.fields.lastName"
-              />
-            </div>
+              <div class="demo-field">
+                <input
+                  v-model.trim="form.lastName"
+                  type="text"
+                  class="demo-field__input"
+                  :placeholder="t.demoModal.fields.lastName"
+                />
+              </div>
 
-            <div class="demo-field">
-              <input
-                v-model="form.phone"
-                type="tel"
-                inputmode="tel"
-                autocomplete="tel"
-                class="demo-field__input"
-                :placeholder="t.demoModal.fields.phone"
-                @input="formatPhone"
-              />
-            </div>
+              <div class="demo-field">
+                <input
+                  ref="phoneRef"
+                    type="tel"
+                    inputmode="tel"
+                    autocomplete="tel"
+                    class="demo-field__input"
+                    :class="{ 'demo-field__input--error': errors.phone }"
+                    :placeholder="t.demoModal.fields.phone"
+                />
+                <div v-if="errors.phone" class="demo-field__error">
+                  {{ t.demoModal.errors.phone }}
+                </div>
+              </div>
 
-            <div class="demo-field">
-              <input
-                v-model.trim="form.email"
-                type="email"
-                autocomplete="email"
-                class="demo-field__input"
-                :class="{ 'demo-field__input--error': emailError }"
-                :placeholder="t.demoModal.fields.email"
-                @blur="validateEmail"
-              />
-              <div v-if="emailError" class="demo-field__error">
-                {{ t.demoModal.emailError }}
+              <div class="demo-field">
+                <input
+                  v-model.trim="form.email"
+                  type="email"
+                  autocomplete="email"
+                  class="demo-field__input"
+                  :class="{ 'demo-field__input--error': errors.email }"
+                  :placeholder="t.demoModal.fields.email"
+                  @input="errors.email = false"
+                />
+                <div v-if="errors.email" class="demo-field__error">
+                  {{ t.demoModal.errors.email }}
+                </div>
+              </div>
+
+              <div class="demo-field demo-field--full">
+                <input
+                  v-model.trim="form.company"
+                  type="text"
+                  class="demo-field__input"
+                  :class="{ 'demo-field__input--error': errors.company }"
+                  :placeholder="t.demoModal.fields.company"
+                  @input="errors.company = false"
+                />
+                <div v-if="errors.company" class="demo-field__error">
+                  {{ t.demoModal.errors.required }}
+                </div>
               </div>
             </div>
 
             <div class="demo-field demo-field--full">
-              <input
-                v-model.trim="form.company"
-                type="text"
-                class="demo-field__input"
-                :placeholder="t.demoModal.fields.company"
+              <textarea
+                v-model.trim="form.comment"
+                class="demo-field__textarea"
+                :placeholder="t.demoModal.fields.comment"
               />
             </div>
-          </div>
 
-          <div class="demo-field demo-field--full">
-            <textarea
-              v-model.trim="form.comment"
-              class="demo-field__textarea"
-              :placeholder="t.demoModal.fields.comment"
-            />
-          </div>
+            <div class="demo-modal__footer">
+              <p class="demo-modal__note">
+                {{ t.demoModal.note }}
+              </p>
 
-          <div class="demo-modal__footer">
-            <p class="demo-modal__note">
-              {{ t.demoModal.note }}
-            </p>
+              <BaseButton variant="primary" type="submit">
+                {{ t.demoModal.submit }}
+              </BaseButton>
+            </div>
+          </form>
+        </template>
 
-            <BaseButton
-              variant="primary"
-              type="submit"
-            >
-              {{ t.demoModal.submit }}
-            </BaseButton>
-          </div>
-        </form>
-      </div>
+        <div v-else class="demo-modal__success">
+          <div ref="successIconRef" class="demo-modal__success-icon"></div>
 
-      <transition name="demo-toast-fade">
-        <div v-if="showToast" class="demo-toast">
-          {{ t.demoModal.success }}
+          <h3 class="demo-modal__title">
+            {{ t.demoModal.successTitle }}
+          </h3>
+
+          <p class="demo-modal__subtitle">
+            {{ t.demoModal.successText }}
+          </p>
+
+          <BaseButton variant="primary" type="button" @click="close">
+            {{ t.demoModal.close }}
+          </BaseButton>
         </div>
-      </transition>
+      </div>
     </div>
   </transition>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, watch, onMounted, onUnmounted } from 'vue'
+import { reactive, ref, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import { useLocale } from '../../composables/useLocale'
 import BaseButton from '../ui/BaseButton.vue'
+import lottie from 'lottie-web'
+import successCheck from '../../assets/animations/success-check.json'
+import IMask from 'imask'
+
+const phoneRef = ref<HTMLInputElement | null>(null)
+let phoneMask: ReturnType<typeof IMask> | null = null
 
 const props = defineProps<{
   modelValue: boolean
@@ -153,12 +181,31 @@ const form = reactive({
   comment: '',
 })
 
-const emailError = ref(false)
-const showToast = ref(false)
-let toastTimer: ReturnType<typeof setTimeout> | null = null
+const errors = reactive({
+  firstName: false,
+  phone: false,
+  email: false,
+  company: false,
+})
+
+const isSuccess = ref(false)
+
+const successIconRef = ref<HTMLDivElement | null>(null)
+let successAnimation: ReturnType<typeof lottie.loadAnimation> | null = null
+
+const clearErrors = () => {
+  errors.firstName = false
+  errors.phone = false
+  errors.email = false
+  errors.company = false
+}
 
 const close = () => {
   emit('update:modelValue', false)
+  isSuccess.value = false
+  clearErrors()
+  successAnimation?.destroy()
+  successAnimation = null
 }
 
 const resetForm = () => {
@@ -168,66 +215,53 @@ const resetForm = () => {
   form.email = ''
   form.company = ''
   form.comment = ''
-  emailError.value = false
+
+  if (phoneMask) {
+    phoneMask.value = ''
+  }
+
+  clearErrors()
+}
+const initPhoneMask = async () => {
+  await nextTick()
+
+  if (!phoneRef.value || phoneMask) return
+
+  phoneMask = IMask(phoneRef.value, {
+    mask: '+{7} (000) 000-00-00',
+    lazy: false,
+  })
+
+  phoneMask.on('accept', () => {
+    form.phone = phoneMask?.value || ''
+
+    if (errors.phone) {
+      errors.phone = (phoneMask?.unmaskedValue.length ?? 0) !== 11
+    }
+  })
 }
 
-const formatPhone = (e: Event) => {
-  const input = e.target as HTMLInputElement
-
-  let value = input.value.replace(/\D/g, '').slice(0, 11)
-
-  if (value.startsWith('8')) value = '7' + value.slice(1)
-  if (value && !value.startsWith('7')) value = '7' + value.slice(0, 10)
-
-  let formatted = '+7'
-
-  if (value.length > 1) {
-    formatted += ' (' + value.slice(1, 4)
-  }
-  if (value.length >= 4) {
-    formatted += ') ' + value.slice(4, 7)
-  }
-  if (value.length >= 7) {
-    formatted += '-' + value.slice(7, 9)
-  }
-  if (value.length >= 9) {
-    formatted += '-' + value.slice(9, 11)
-  }
-
-  input.value = formatted
-  form.phone = formatted
+const destroyPhoneMask = () => {
+  phoneMask?.destroy()
+  phoneMask = null
 }
-
-const validateEmail = () => {
-  if (!form.email) {
-    emailError.value = false
-    return true
-  }
-
+const validateForm = () => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  emailError.value = !emailRegex.test(form.email)
-  return !emailError.value
-}
 
-const showSuccessToast = () => {
-  showToast.value = true
+  errors.firstName = !form.firstName.trim()
+  errors.phone = (phoneMask?.unmaskedValue.length ?? 0) !== 11
+  errors.email = !emailRegex.test(form.email)
+  errors.company = !form.company.trim()
 
-  if (toastTimer) {
-    clearTimeout(toastTimer)
-  }
-
-  toastTimer = setTimeout(() => {
-    showToast.value = false
-  }, 2600)
+  return !errors.firstName && !errors.phone && !errors.email && !errors.company
 }
 
 const submit = () => {
-  if (!validateEmail()) return
+  if (!validateForm()) return
 
   emit('submit', { ...form })
-  close()
-  showSuccessToast()
   resetForm()
+  isSuccess.value = true
 }
 
 const onKeydown = (event: KeyboardEvent) => {
@@ -236,10 +270,39 @@ const onKeydown = (event: KeyboardEvent) => {
   }
 }
 
+watch(isSuccess, async (value) => {
+  if (!value) return
+
+  await nextTick()
+
+  if (!successIconRef.value) return
+
+  successAnimation?.destroy()
+
+  successAnimation = lottie.loadAnimation({
+    container: successIconRef.value,
+    renderer: 'svg',
+    loop: false,
+    autoplay: true,
+    animationData: successCheck,
+  })
+})
+
 watch(
   () => props.modelValue,
-  (isOpen) => {
+  async (isOpen) => {
     document.body.style.overflow = isOpen ? 'hidden' : ''
+
+    if (isOpen) {
+      isSuccess.value = false
+      clearErrors()
+      successAnimation?.destroy()
+      successAnimation = null
+
+      await initPhoneMask()
+    } else {
+      destroyPhoneMask()
+    }
   }
 )
 
@@ -251,10 +314,10 @@ onUnmounted(() => {
   document.body.style.overflow = ''
   window.removeEventListener('keydown', onKeydown)
 
-  if (toastTimer) {
-    clearTimeout(toastTimer)
-  }
+  destroyPhoneMask()
+  successAnimation?.destroy()
 })
+
 </script>
 
 <style scoped>
@@ -434,20 +497,41 @@ onUnmounted(() => {
   max-width: 580px;
 }
 
-.demo-toast {
-  position: fixed;
-  left: 50%;
-  bottom: 28px;
-  transform: translateX(-50%);
-  z-index: 130;
-  padding: 14px 18px;
-  border-radius: 14px;
-  background: rgba(20, 30, 46, 0.96);
-  color: #ffffff;
-  font-size: 14px;
-  line-height: 1.4;
-  box-shadow: 0 16px 40px rgba(5, 14, 28, 0.34);
+.demo-modal__success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  padding-top: 8px;
+  animation: successFade 0.4s ease;
 }
+.demo-modal__success-icon {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1px;
+}
+.demo-modal__success .demo-modal__title {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+.demo-modal__success .demo-modal__subtitle {
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--color-subtitle);
+  max-width: 420px;
+  margin-bottom: 36px;
+}
+.demo-modal__success .base-button {
+  margin-top: 8px;
+}
+
 
 .demo-modal-fade-enter-active,
 .demo-modal-fade-leave-active {

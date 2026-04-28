@@ -2,7 +2,7 @@ import ru from './ru'
 import en from './en'
 import kz from './kz'
 
-export type Locale = 'ru' | 'en' | 'kz'
+export type Locale = 'kz' | 'ru' | 'en'
 
 export const messages = {
   ru,

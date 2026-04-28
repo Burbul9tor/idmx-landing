@@ -26,7 +26,8 @@
             @click="setActive(index)"
           >
             <div class="scenario-card__icon">
-              <img :src="item.icon" :alt="item.title" />
+              <img :src="item.icon" :alt="item.title" loading="lazy"
+                decoding="async" />
             </div>
 
             <div class="scenario-card__body">

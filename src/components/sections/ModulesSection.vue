@@ -86,6 +86,7 @@
                 <img
                   :src="activeModule.image"
                   :alt="activeModule.title"
+                  decoding="async"
                   class="modules__screen-image"
                   @click="isPreviewOpen = true"
                 />

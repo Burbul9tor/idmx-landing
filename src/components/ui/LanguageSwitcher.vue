@@ -43,7 +43,7 @@ import { useLocale } from '../../composables/useLocale'
 const { locale, setLocale } = useLocale()
 const isOpen = ref(false)
 
-const locales: Locale[] = ['ru', 'en', 'kz']
+const locales: Locale[] = ['kz', 'ru', 'en']
 
 function selectLocale(value: Locale) {
   setLocale(value)

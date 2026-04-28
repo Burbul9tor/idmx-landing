@@ -23,7 +23,8 @@
           :style="{ animationDelay: `${index * 0.08}s` }"
         >
           <div class="solution-card__icon">
-            <img :src="item.icon" :alt="item.title" />
+            <img :src="item.icon" :alt="item.title" loading="lazy"
+                decoding="async" />
           </div>
 
           <h3 class="solution-card__title">

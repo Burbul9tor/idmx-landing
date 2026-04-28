@@ -440,7 +440,9 @@ const en = {
       {
         question: 'How long does implementation take?',
         answer:
-          'The timeline depends on the scale of the infrastructure, the number of integrations, and company requirements. If needed, a pilot launch on a limited scope is possible.',
+  'Depends on the scale and readiness of the infrastructure.\n\n' +
+  'IDMX implementation is carried out in stages: audit of the current infrastructure, requirements gathering, integration with AD/LDAP and HR systems, configuration of the access matrix, role model and approval workflows, testing, administrator training, pilot launch in a single department, followed by full rollout.\n\n' +
+  'For companies with up to 500 employees, the basic setup can be launched within 4–6 weeks. Large enterprises with multiple systems typically require 8–12 weeks.',
       },
       {
         question: 'Can it be integrated with our systems?',
@@ -503,6 +505,15 @@ const en = {
       email: 'Email',
       company: 'Company name',
       comment: 'Note...',
+    },
+    successTitle: 'Request received',
+    successText: 'We will contact you shortly.',
+    close: 'Close',
+
+    errors: {
+      required: 'Required field',
+      email: 'Enter a valid email',
+      phone: 'Enter a valid phone number',
     },
   },
 } as const

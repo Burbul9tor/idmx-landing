@@ -40,7 +40,8 @@
           <!-- AD -->
           <article class="integration-card">
             <div class="integration-card__icon">
-              <img :src="adIcon" :alt="t.integrations.items.top.title" />
+              <img :src="adIcon" :alt="t.integrations.items.top.title" loading="lazy"
+                decoding="async" />
             </div>
             <div>
               <h3>{{ t.integrations.items.top.title }}</h3>
