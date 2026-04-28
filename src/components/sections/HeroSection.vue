@@ -537,17 +537,23 @@ const scrollToNext = () => {
 }
 
 .hero-stats--enter {
+  position: relative;
+  z-index: 3;
+
   opacity: 0;
   filter: blur(8px);
   transform: translateY(22px);
   animation: heroStatsEnter 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.75s forwards;
 }
+
 .hero-scroll {
   position: absolute;
   bottom: 28px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 2;
+  z-index: 1;
+  pointer-events: none;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -830,6 +836,8 @@ const scrollToNext = () => {
   max-width: 420px;
   margin-top: 32px;
   padding: 24px;
+   position: relative;
+  z-index: 2;
 }
 
 .hero-stat {
@@ -854,4 +862,11 @@ const scrollToNext = () => {
   font-size: 15px;
 }
 }
+  .hero__scroll {
+    position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  }
+  
+
 </style>
