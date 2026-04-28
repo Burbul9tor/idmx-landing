@@ -1,139 +1,141 @@
 const en = {
   nav: {
-    solution: 'Solution',
+    solution: 'What you get',
     how: 'How it works',
     modules: 'Modules',
-    
     integrations: 'Integrations',
     scenarios: 'Use cases',
     faq: 'FAQ',
-    demo: 'Get demo',
+    demo: 'Request demo',
   },
 
   hero: {
     eyebrow: 'Enterprise Identity Management',
-    title: 'Full control over access and identities',
+    title: 'Every unrevoked access is a risk you don’t see yet',
     subtitle:
-      'Automate access management, reduce information security risks, and pass audits without stress',
-    primaryCta: 'Get demo',
-    secondaryCta: 'Request presentation',
+      'IDMX provides full visibility: who has access, on what basis, who approved it, and when it expires. Proven control — not just for audits, but at all times.',
+    primaryCta: 'Check if you have a problem',
     noteTitle: 'No implementation required',
-    noteText: 'We’ll show the system using real scenarios',
+    noteText:
+      'We will show real scenarios: onboarding, transfer, offboarding, audit',
     points: [
       'Centralized access management',
-      'Automated identity lifecycle',
-      'Visibility and control at the business level',
-      'Reduced workload for IT and security teams',
+      'Identity lifecycle automation',
+      'Business-level visibility and control',
+      'Reduced operational load on IT and security teams',
     ],
     stats: [
-  {
-    value: '70%',
-    text: 'успешных атак — через уязвимости в доступах и конфигурации',
-  },
-  {
-    value: '42%',
-    text: 'организаций не знают, сколько у них «мёртвых» аккаунтов',
-  },
-  {
-    value: '3+ дня',
-    text: 'средняя задержка блокировки уволенных в компаниях без IDM',
-  },
-],
-  },
-
-problems: {
-  eyebrow: 'WHY THIS IS URGENT',
-  title: 'An incident does not warn you — it just happens',
-  subtitle:
-    'Each of these scenarios is not chaos, but a real vulnerability in any company without an IDM system',
-
-  topCards: [
-    {
-      title: 'A former employee still has access',
-      description:
-        'The employee left, but their account in AD is still active. They can log in at any time.',
-    },
-    {
-      title: 'Temporary access becomes permanent',
-      description:
-        'A contractor finished the project, but their access was never revoked. No one even noticed.',
-    },
-  ],
-
-  bottomCards: [
-    {
-      title: 'Access matrix is stored in Excel',
-      description:
-        'The file was updated months ago, does not reflect reality, and provides no real control.',
-    },
-    {
-      title: 'Audit turns into weeks of manual work',
-      description:
-        'Data is collected manually and reconciled across systems. The IT team spends weeks proving the obvious.',
-    },
-    {
-      title: 'No one knows who has access',
-      description:
-        'There is no single view of access rights. Each system is isolated. Incidents may go unnoticed for months.',
-    },
-    {
-      title: 'Access requests are approved via email',
-      description:
-        'Each access grant lacks traceability. Who approved it? When? Why? There is no audit or control.',
-    },
-  ],
-
-  resultLabel: 'WHAT THIS LEADS TO',
-  resultText:
-    'As a result, the company loses control over access, wastes time on manual processes, and increases security risks.',
-},
-solution: {
-  eyebrow: 'КАК РАБОТАЕТ IDMX',
-  title: 'Полная цепочка происхождения каждого доступа',
-  subtitle:
-    'Кто запросил. Кто одобрил. По какому правилу. Когда истекает. IDMX — единый источник правды о доступах во всей инфраструктуре.',
-
-  cards: [
-    {
-      title: 'Видимость без слепых зон',
-      description:
-        'Единый дашборд: кто, в какие системы, на каком основании — в реальном времени. Без выгрузок и запросов в IT.',
-    },
-    {
-      title: 'Снижение attack surface',
-      description:
-        'Автоматический отзыв доступов при увольнении и смене роли. Избыточные привилегии выявляются и устраняются проактивно.',
-    },
-    {
-      title: 'Доказуемость каждого решения',
-      description:
-        'Полный audit trail: кто выдал доступ, кто одобрил, по какому бизнес-правилу. Ответ аудитору — за минуты.',
-    },
-    {
-      title: 'Готовность к аудиту — всегда',
-      description:
-        'Не к проверке, а постоянно. Отчёт о состоянии доступов для регулятора или совета директоров — в несколько кликов.',
-    },
-  ],
-
-  resultLabel: 'Что это даёт',
-  resultText:
-    'Директор ИБ, который может в любой момент ответить «кто имеет доступ, почему и на каком основании» — защищён профессионально и юридически.',
-},
-  how: {
-    eyebrow: 'How it works?',
-    title: 'Access is granted automatically from day one',
-    subtitle:
-      'IDMX builds access management based on a predefined role and permissions matrix',
-    extraLabel: 'If additional access is required',
-    topSteps: [
       {
-        title: 'Employee role',
-        text: 'The system determines the employee’s position and department',
+        value: '70%',
+        text: 'of successful attacks exploit access and configuration vulnerabilities',
       },
       {
-        title: 'Basic access',
-        text: 'Permissions are assigned according to the access matrix',
+        value: '42%',
+        text: 'of organizations don’t know how many “orphaned” accounts they have',
+      },
+      {
+        value: '3+ days',
+        text: 'average delay in deactivating terminated employees without IDM',
+      },
+    ],
+  },
+
+  problems: {
+    eyebrow: 'BLIND SPOTS',
+    title: 'What you don’t see — attackers do',
+    subtitle:
+      'Without an IDM system, security teams manage access blindly. Each of these situations is a real vulnerability in your infrastructure right now.',
+
+    topCards: [
+      {
+        title: 'Access without an owner',
+        description:
+          'An employee is terminated, but the account is still active. No owner — no accountability. Only risk.',
+      },
+      {
+        title: 'Access without justification',
+        description:
+          'Access was granted — but by whom, when, and why? There’s an email, but no system record. Auditors will ask.',
+      },
+    ],
+
+    bottomCards: [
+      {
+        title: 'Access matrix is outdated',
+        description:
+          'The Excel file was last updated months ago. The real access landscape exists only in IT’s head.',
+      },
+      {
+        title: 'Audit is manual',
+        description:
+          'Data from multiple systems, manual reconciliation, weeks of preparation — and still no confidence in the result.',
+      },
+      {
+        title: 'Privileges accumulate over time',
+        description:
+          'When roles change, old permissions remain. Employees accumulate unnecessary access for years.',
+      },
+      {
+        title: 'No decision traceability',
+        description:
+          'Access is granted — but who approved it? On what basis? Without IDM, this cannot be proven.',
+      },
+    ],
+
+    resultLabel: 'CORE PROBLEM',
+    resultText:
+      'The CISO is responsible for risks they cannot see. IDMX makes every access visible, justified, and provable.',
+  },
+
+  solution: {
+    eyebrow: 'WHAT YOU GET',
+    title: 'Full access lineage for every permission',
+    subtitle:
+      'Who requested it. Who approved it. Based on which rule. When it expires. IDMX is the single source of truth for access across your infrastructure.',
+
+    cards: [
+      {
+        title: 'Full visibility',
+        description:
+          'A unified access database: who has access to what and why — in real time. No exports or IT requests needed.',
+      },
+      {
+        title: 'Reduced attack surface',
+        description:
+          'Automatic access revocation on termination or role change. Excessive privileges are detected and removed proactively.',
+      },
+      {
+        title: 'Provable decisions',
+        description:
+          'Complete audit trail: who granted access, who approved it, and under which business rule. Answers for auditors in minutes.',
+      },
+      {
+        title: 'Always audit-ready',
+        description:
+          'Not just during audits — continuously. Generate reports for regulators or the board in a few clicks.',
+      },
+    ],
+
+    resultLabel: 'What this gives you',
+    resultText:
+      'A CISO who can answer “who has access, why, and on what basis” at any moment is protected both professionally and legally.',
+  },
+
+  how: {
+    eyebrow: 'How it works',
+    title: 'Every change in your organization instantly updates access',
+    subtitle:
+      'New hire, transfer, termination, contractor — IDMX reacts automatically, without IT involvement.',
+    extraLabel: 'If additional access is required',
+
+    topSteps: [
+      {
+        title: 'New employee',
+        text: 'The system determines position and department',
+      },
+      {
+        title: 'Base access',
+        text: 'Permissions are assigned based on access matrix',
       },
       {
         title: 'Accounts',
@@ -141,404 +143,113 @@ solution: {
       },
       {
         title: 'Ready to work',
-        text: 'The employee receives access without delays',
+        text: 'Employee gets access without delays',
       },
     ],
+
     bottomSteps: [
       {
         step: '1',
         title: 'Request',
-        text: 'The user submits a request through the self-service portal',
+        text: 'User submits a request via self-service portal',
       },
       {
         step: '2',
         title: 'Approval',
-        text: 'The system routes the request through the approval workflow',
+        text: 'The system routes the request for approval',
       },
       {
         step: '3',
         title: 'Provisioning',
-        text: 'After approval, access is granted automatically',
+        text: 'Access is granted automatically after approval',
       },
       {
         step: '4',
         title: 'Control',
-        text: 'All actions are logged and available for control and audit',
+        text: 'All actions are logged and available for audit',
       },
     ],
   },
 
-
   modulesSection: {
-  eyebrow: 'Modules',
-  title: 'Key platform modules',
-  description: 'IDMX brings together access management, process automation, and security control in a single system.',
-  items: [
-    {
-      title: 'Access Matrix',
-      subtitle: 'Manageable role model',
-      features: [
-        'Definition of baseline roles and access rights',
-        'Automation of identity lifecycle',
-        'Centralized access rights management',
-        'Control over access distribution',
-      ],
-    },
-    {
-      title: 'Identity Management (IDM)',
-      subtitle: 'Identity lifecycle management',
-      features: [
-        'Automatic account creation',
-        'Access changes during transfers',
-        'Timely blocking on termination',
-        'Access relevance is maintained automatically',
-      ],
-    },
-    {
-      title: 'Self-service portal',
-      subtitle: 'Convenience for users, control for business',
-      features: [
-        'Request submission in a single interface',
-        'Status tracking',
-        'History of all operations',
-      ],
-    },
-    {
-      title: 'Audit and reporting',
-      subtitle: 'Transparency for control and compliance',
-      features: [
-        'History of all access changes',
-        'Automatic identity audit',
-        'Detailed reporting',
-      ],
-    },
-  ],
-},
-businessEffects: {
-  eyebrow: 'Business impact',
-  title: 'Costs go down, control gets stronger',
-  subtitle: 'IDMX creates measurable value for business',
-  hero: {
-    value: 'Up to 80%',
-    text: 'reduction in access provisioning time',
-  },
-  items: [
-    {
-      icon: 'load',
-      title: 'Reduced workload for IT teams',
-      text: 'Reduce operational workload by up to 60%',
-    },
-    {
-      icon: 'human',
-      title: 'Minimizing the human factor',
-      text: 'Fewer errors in access assignment',
-    },
-    {
-      icon: 'process',
-      title: 'Better process transparency',
-      text: 'Full visibility of all actions',
-    },
-    {
-      icon: 'audit',
-      title: 'Faster audit preparation',
-      text: 'Prepare for audits in hours',
-    },
-  ],
-},
-
-integrations: {
-  eyebrow: 'Integrations',
-  title: 'Fast connection to existing infrastructure',
-  subtitle: 'IDMX fits naturally into your corporate IT landscape',
-  center: {
-    title: 'Centralized management',
-    text: 'IDMX works on top of your existing infrastructure and brings access management, account lifecycle, and control into a single system.',
-  },
-  items: {
-    top: {
-      title: 'Active Directory & LDAP',
-      text: 'Automatic processing of HR changes and lifecycle events',
-    },
-    left: {
-      title: 'HR systems',
-      text: 'Automatic processing of HR changes and lifecycle events',
-    },
-    right: {
-      title: 'ERP platforms',
-      text: 'Connection with business systems, roles, and employee identity data.',
-    },
-    bottomLeft: {
-      title: 'Mail services',
-      text: 'Management of corporate accounts and access to email services.',
-    },
-    bottomRight: {
-      title: 'Business applications',
-      text: 'Unified provisioning and deprovisioning of access across enterprise applications',
-    },
-  },
-},
-ctaFinal: {
-  title: 'Take access management under full control',
-  subtitle: 'IDMX is not just a system, but the foundation of a secure and manageable IT environment.',
-  button: 'Get a demo',
-},
-faqSection: {
-  eyebrow: 'FAQ',
-  title: 'Frequently asked questions',
-  items: [
-    {
-      question: 'How long does implementation take?',
-      answer:
-        'The timeline depends on the scale of the infrastructure, the number of integrations, and the company’s requirements. If needed, a pilot launch can be carried out in a limited environment.',
-    },
-    {
-      question: 'Can it be integrated with our systems?',
-      answer:
-        'Yes, IDMX supports integration with most corporate solutions, including HR systems, Active Directory, mail services, and other data sources.',
-    },
-    {
-      question: 'Is the solution suitable for large companies?',
-      answer:
-        'Yes, the system is designed for scalability and stable operation in complex distributed infrastructures with a large number of users and accounts.',
-    },
-    {
-      question: 'How is security ensured?',
-      answer:
-        'Security is ensured through a role-based access model, action logging, centralized control, and full transparency of approval and access management processes.',
-    },
-  ],
-},
-scenariosSection: {
-  eyebrow: 'Use Cases',
-  title: 'Practical use in daily processes',
-  subtitle:
-    'IDMX automates key access management scenarios — from onboarding to privileged access control and audit readiness.',
-
-  labels: {
-    effect: 'Effect',
-    application: 'Use case',
+    eyebrow: 'Modules',
+    title: 'Key platform modules',
+    description:
+      'IDMX combines access management, process automation, and security control in one system.',
+    items: [
+      {
+        title: 'Access Matrix',
+        subtitle: 'Role-based model',
+        features: [
+          'Define base roles and permissions',
+          'Foundation for lifecycle automation',
+          'Centralized access control',
+          'Access distribution governance',
+        ],
+      },
+      {
+        title: 'Identity Management (IDM)',
+        subtitle: 'Identity lifecycle management',
+        features: [
+          'Automatic account creation',
+          'Access updates on transfers',
+          'Timely deactivation on termination',
+          'Always up-to-date access',
+        ],
+      },
+      {
+        title: 'Self-service portal',
+        subtitle: 'Convenience for users, control for business',
+        features: [
+          'Unified request interface',
+          'Status tracking',
+          'Full history of actions',
+        ],
+      },
+      {
+        title: 'Audit & reporting',
+        subtitle: 'Transparency for control and compliance',
+        features: [
+          'Full access history',
+          'Automated audits',
+          'Detailed reporting',
+        ],
+      },
+    ],
   },
 
-  items: [
-    {
-      title: 'Access is ready from day one',
-      text: 'Automatic access provisioning from the first working day.',
-      previewTitle: 'Access for new employees without manual work',
-      previewText:
-        'The system determines roles, launches approval, and grants access without email chains or spreadsheets.',
-      metric: {
-        value: 'Up to 80%',
-        text: 'reduction in access provisioning time',
-      },
-      extra: {
-        effect: 'Employees start working without delays',
-        application: 'HR, IT, managers',
-      },
-      steps: [
-        {
-          icon: 'create',
-          title: 'Creation',
-          text: 'The employee appears in the system',
-        },
-        {
-          icon: 'rules',
-          title: 'Access definition',
-          text: 'Roles are assigned automatically',
-        },
-        {
-          icon: 'approve',
-          title: 'Approval',
-          text: 'The request goes through the approval flow',
-        },
-        {
-          icon: 'access',
-          title: 'Provisioning',
-          text: 'Access is granted in connected systems',
-        },
-      ],
+  businessEffects: {
+    eyebrow: 'WHAT CISO GETS',
+    title: 'Control you can prove',
+    subtitle:
+      'IDMX shifts the CISO role from reactive firefighting to provable risk management.',
+    hero: {
+      value: '21.6',
+      text: 'maximum fine for personal data breach in Kazakhstan',
     },
-
-    {
-      title: 'HR changes automatically update access rights',
-      text: 'Any personnel change is immediately reflected in access rights.',
-      previewTitle: 'Current access rights for any HR change',
-      previewText:
-        'The system automatically recalculates access rights when employees are transferred, leave the company, or change roles.',
-      metric: {
-        value: '24/7',
-        text: 'up-to-date access without manual checks',
+    items: [
+      {
+        icon: 'load',
+        title: 'Criminal liability',
+        text: 'Criminal liability is being introduced for major data breaches. IDMX proves control was in place.',
       },
-      extra: {
-        effect: 'Access always matches the current role',
-        application: 'HR, security, system owners',
+      {
+        icon: 'human',
+        title: 'Reduced insider threats',
+        text: 'Excessive privileges are automatically detected. Least privilege is enforced in reality, not just policy.',
       },
-      steps: [
-        {
-          icon: 'sync',
-          title: 'Change',
-          text: 'HR records the update',
-        },
-        {
-          icon: 'rules',
-          title: 'Recalculation',
-          text: 'The system analyzes access rights',
-        },
-        {
-          icon: 'control',
-          title: 'Update',
-          text: 'Access rights are updated automatically',
-        },
-      ],
-    },
-
-    {
-      title: 'Contractors get access only for the required period',
-      text: 'Temporary access with automatic revocation.',
-      previewTitle: 'Contractor control without risks',
-      previewText:
-        'Access is limited by time and scope and is automatically revoked without manual control.',
-      metric: {
-        value: '0',
-        text: 'excess access after work is completed',
+      {
+        icon: 'process',
+        title: 'Executive visibility',
+        text: 'Access reports for the board in a few clicks — not “we’re working on it”, but “here is proof”.',
       },
-      extra: {
-        effect: 'Lower risks when working with contractors',
-        application: 'Security, IT',
+      {
+        icon: 'audit',
+        title: 'Audit in hours',
+        text: 'Ready-made reports for regulators, ISO audits, or internal audits — without weeks of manual work.',
       },
-      steps: [
-        {
-          icon: 'create',
-          title: 'Request',
-          text: 'Access is created with time and scope restrictions',
-        },
-        {
-          icon: 'approve',
-          title: 'Approval',
-          text: 'Access is approved based on the risk level',
-        },
-        {
-          icon: 'control',
-          title: 'Auto-revocation',
-          text: 'Access is automatically revoked when the period ends',
-        },
-      ],
-    },
-
-    {
-      title: 'Audit without spreadsheets and manual checks',
-      text: 'Complete history and transparency of access rights.',
-      previewTitle: 'Audit preparation without chaos',
-      previewText:
-        'The full history of access rights and changes is stored in the system and is available for review.',
-      metric: {
-        value: '100%',
-        text: 'transparency of access and changes',
-      },
-      extra: {
-        effect: 'Audit preparation takes less time',
-        application: 'Security, audit, compliance',
-      },
-      steps: [
-        {
-          icon: 'control',
-          title: 'Storage',
-          text: 'All changes are recorded in the system',
-        },
-        {
-          icon: 'rules',
-          title: 'Review',
-          text: 'Access and history are checked quickly',
-        },
-        {
-          icon: 'access',
-          title: 'Reporting',
-          text: 'Data is ready for analysis and audit',
-        },
-      ],
-    },
-
-    {
-      title: 'Access to personal data stays under strict control',
-      text: 'Special privileges and enhanced control.',
-      previewTitle: 'Control of privileges for personal data access',
-      previewText:
-        'The system helps track who received access to personal data and other sensitive resources, when it was granted, and on what basis.',
-      metric: {
-        value: '100%',
-        text: 'transparency of privileged access',
-      },
-      extra: {
-        effect: 'Lower risks when working with personal data',
-        application: 'Security, compliance, sensitive system owners',
-      },
-      steps: [
-        {
-          icon: 'rules',
-          title: 'Policies',
-          text: 'Special rules apply to this type of access',
-        },
-        {
-          icon: 'approve',
-          title: 'Control',
-          text: 'The request goes through enhanced approval',
-        },
-        {
-          icon: 'control',
-          title: 'Monitoring',
-          text: 'All changes and assignments are fully tracked',
-        },
-      ],
-    },
-  ],
-},
-footer: {
-  description: 'Full control over access and identities for your business',
-  linksLeft: [
-    { label: 'Challenges', href: '#problems' },
-    { label: 'Solution', href: '#solution' },
-    { label: 'How it works', href: '#how' },
-    { label: 'Modules', href: '#modules' },
-    { label: 'Business impact', href: '#effects' },
-  ],
-  linksRight: [
-    { label: 'Integrations', href: '#integrations' },
-    { label: 'Use cases', href: '#scenarios' },
-    
-    { label: 'FAQ', href: '#faq' },
-  ],
-  email: 'Info@idmx.kz',
-  phone: '+7 777 777 77 77',
-  primaryCta: {
-    label: 'Request demo',
-    href: '#demo',
+    ],
   },
-  secondaryCta: {
-    label: 'Support',
-    href: '#support',
-  },
-  copyright: '© 2026 IDMX. All rights reserved.',
-  legal: [
-    { label: 'Privacy policy', href: '#' },
-    { label: 'Terms of use', href: '#' },
-  ],
-},
-demoModal: {
-  title: 'Request a product demo',
-  subtitle: 'We will show how IDMX helps automate access management, reduce risks, and simplify audits.',
-  submit: 'Submit request',
-  note: 'After submitting your request, we will contact you shortly.',
-  success: 'Request sent. We will contact you soon.',
-  emailError: 'Please enter a valid email',
-  fields: {
-    firstName: 'First name',
-    lastName: 'Last name',
-    phone: 'Phone',
-    email: 'Email',
-    company: 'Company name',
-    comment: 'Note...',
-  },
-},
-
-} as const
+}
 
 export default en

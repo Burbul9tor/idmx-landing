@@ -1,4 +1,9 @@
 <template>
+  <div class="hero-scroll" @click="scrollToNext">
+  <div class="hero-scroll__mouse">
+    <div class="hero-scroll__dot"></div>
+  </div>
+</div>
   <section class="hero">
     <div class="hero__bg">
       <div class="hero__aurora hero__aurora--one"></div>
@@ -28,12 +33,12 @@
         </div>
 
         <div class="hero-cta">
-          <button
+       <!-- <button
           class="hero-btn hero-btn--enter"
           @click="emit('open-demo')"
         >
           {{ t.hero.primaryCta }}
-        </button>
+        </button> 
 
           <div class="hero-cta-note hero-cta-note--enter">
             <span class="hero-cta-note__dot"></span>
@@ -42,33 +47,116 @@
               <strong>{{ t.hero.noteTitle }}</strong>
               <span>{{ t.hero.noteText }}</span>
             </div>
-          </div>
+          </div>-->
         </div>
         <div class="hero-stats hero-stats--enter">
   <div
-    v-for="item in t.hero.stats"
+    v-for="(item, index) in t.hero.stats"
     :key="item.value"
     class="hero-stat"
   >
-    <div class="hero-stat__value">
-      {{ item.value }}
-    </div>
+   <div class="hero-stat__value">
+  {{ computedStats[index].displayValue }}
+</div>
 
     <div class="hero-stat__text">
       {{ item.text }}
     </div>
   </div>
+  
 </div>
       </div>
     </div>
+   
   </section>
 </template>
 
 <script setup lang="ts">
+import { computed, onMounted, ref } from 'vue'
 import { useLocale } from '../../composables/useLocale'
 
 const { t } = useLocale()
 const emit = defineEmits(['open-demo'])
+
+const statsProgress = ref<number[]>([])
+
+const parseStatValue = (value: string) => {
+  const number = Number(value.replace(/[^\d]/g, ''))
+  const prefix = value.match(/^[^\d]+/)?.[0] || ''
+  const suffix = value.match(/[^\d]+$/)?.[0] || ''
+
+  return {
+    number: Number.isNaN(number) ? 0 : number,
+    prefix,
+    suffix,
+  }
+}
+
+const computedStats = computed(() =>
+  t.value.hero.stats.map((item, index) => {
+    const parsed = parseStatValue(item.value)
+    const currentValue = statsProgress.value[index] ?? 0
+
+    return {
+      ...item,
+      displayValue: `${parsed.prefix}${currentValue}${parsed.suffix}`,
+    }
+  })
+)
+
+const animateStats = () => {
+  const stats = t.value.hero.stats.map((item) => parseStatValue(item.value))
+
+  const delay = 300 // 
+
+  setTimeout(() => {
+    stats.forEach((stat, index) => {
+      const duration = 1400
+      const startTime = performance.now()
+
+      const tick = (currentTime: number) => {
+        const progress = Math.min((currentTime - startTime) / duration, 1)
+        const easedProgress = 1 - Math.pow(1 - progress, 3)
+
+        statsProgress.value[index] = Math.round(stat.number * easedProgress)
+
+        if (progress < 1) {
+          requestAnimationFrame(tick)
+        }
+      }
+
+      requestAnimationFrame(tick)
+    })
+  }, delay)
+}
+
+onMounted(() => {
+  statsProgress.value = t.value.hero.stats.map(() => 0)
+
+  const statsBlock = document.querySelector('.hero-stats')
+
+  if (!statsBlock) return
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        animateStats()
+        observer.disconnect()
+      }
+    },
+    {
+      threshold: 0.35,
+    }
+    
+  )
+
+
+  observer.observe(statsBlock)
+})
+const scrollToNext = () => {
+  const next = document.querySelector('#solution')
+  next?.scrollIntoView({ behavior: 'smooth' })
+}
 </script>
 
 <style scoped>
@@ -78,7 +166,7 @@ const emit = defineEmits(['open-demo'])
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: max(920px, 100svh);
+  min-height: max(120px, 100svh);
   padding: 40px 0 100px;
   animation: heroFadeIn 0.6s ease;
   background:
@@ -256,10 +344,10 @@ const emit = defineEmits(['open-demo'])
   gap: 14px;
   margin: 0 0 22px;
   color: var(--color-hero-title);
-  font-size: var(--font-size-hero-title);
+  font-size: 58px;
   font-weight: 800;
   line-height: 68px;
-  max-width: 960px;
+  max-width: 1060px;
   
 }
 
@@ -283,14 +371,6 @@ const emit = defineEmits(['open-demo'])
   line-height: var(--line-height-hero-subtitle);
 }
 
-.hero-cta {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  width: 100%;
-  max-width: 430px;
-}
 
 .hero-btn {
   position: relative;
@@ -415,10 +495,10 @@ const emit = defineEmits(['open-demo'])
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
   width: 100%;
-  max-width: 760px;
-  margin-top: 42px;
-  padding: 28px 32px;
-  border-radius: 28px;
+  max-width: 640px;
+  margin-top: 8px;
+  padding: 20px 24px;
+  border-radius: 22px;
   background: rgba(255, 255, 255, 0.035);
   border: 1px solid rgba(220, 236, 255, 0.12);
   box-shadow: 0 20px 60px rgba(1, 157, 255, 0.08);
@@ -427,7 +507,7 @@ const emit = defineEmits(['open-demo'])
 
 .hero-stat {
   position: relative;
-  padding: 0 28px;
+  padding: 0 20px;
   text-align: center;
 }
 
@@ -442,9 +522,9 @@ const emit = defineEmits(['open-demo'])
 }
 
 .hero-stat__value {
-  margin-bottom: 12px;
-  color: var(--color-primary);
-  font-size: 48px;
+  margin-bottom: 8px;
+  color: var(--color-primary-light);
+  font-size: 34px;
   font-weight: 800;
   line-height: 1;
   letter-spacing: -0.04em;
@@ -452,7 +532,7 @@ const emit = defineEmits(['open-demo'])
 
 .hero-stat__text {
   color: rgba(220, 236, 255, 0.72);
-  font-size: 17px;
+  font-size: 14px;
   line-height: 1.55;
 }
 
@@ -460,7 +540,68 @@ const emit = defineEmits(['open-demo'])
   opacity: 0;
   filter: blur(8px);
   transform: translateY(22px);
-  animation: heroStatsEnter 1s cubic-bezier(0.22, 1, 0.36, 1) 1.35s forwards;
+  animation: heroStatsEnter 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.75s forwards;
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0;
+  animation: heroScrollFadeIn 1s ease 1.6s forwards;
+}
+
+.hero-scroll__mouse {
+  width: 26px;
+  height: 44px;
+  border-radius: 20px;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+  backdrop-filter: blur(6px);
+}
+
+.hero-scroll__dot {
+  width: 4px;
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  animation: scrollDot 2s ease-in-out infinite;
+}
+
+@keyframes scrollDot {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(10px);
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes heroScrollFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
 }
 
 @keyframes heroStatsEnter {
