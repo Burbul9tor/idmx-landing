@@ -53,9 +53,7 @@ import arrowIcon from '../../assets/icons/arrow.svg'
 
 const { t } = useLocale()
 
-const openItems = ref<Record<number, boolean>>({
-  2: true,
-})
+const openItems = ref<Record<number, boolean>>({})
 
 const toggleItem = (index: number) => {
   openItems.value[index] = !openItems.value[index]
