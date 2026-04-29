@@ -11,16 +11,24 @@
         </p>
 
         <button
-          type="button"
-          class="final-cta__button"
-          @click="emit('open-demo')"
-        >
-          {{ t.ctaFinal.button }}
-        </button>
+        type="button"
+        class="final-cta__button"
+        @click="emit('open-demo')"
+      >
+        {{ t.ctaFinal.button }}
+      </button>
       </div>
 
       <div class="final-cta__visual">
-        <img :src="ctaGif" alt="" class="final-cta__gif" />
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          class="final-cta__video"
+        >
+          <source :src="ctaVideo" type="video/mp4" />
+        </video>
       </div>
     </div>
   </section>
@@ -28,10 +36,12 @@
 
 <script setup lang="ts">
 import { useLocale } from '../../composables/useLocale'
-import ctaGif from '../../assets/cta/cta-visual.gif'
+import ctaVideo from '../../assets/cta/cta-visual.mp4'
 
 const { t } = useLocale()
-const emit = defineEmits(['open-demo'])
+const emit = defineEmits<{
+  (e: 'open-demo'): void
+}>()
 </script>
 
 <style scoped>
@@ -39,10 +49,17 @@ const emit = defineEmits(['open-demo'])
   position: relative;
   overflow: hidden;
   padding: 120px 0;
-  background:
-    radial-gradient(circle at 18% 50%, rgba(1, 157, 255, 0.32), transparent 34%),
-    radial-gradient(circle at 100% 50%, rgba(220, 241, 255, 0.34), transparent 38%),
-    linear-gradient(90deg, #019dff 0%, #8fd6ff 100%);
+ background:
+    radial-gradient(
+      80% 80% at 50% 20%,
+      rgba(18, 44, 96, 0.28) 0%,
+      rgba(10, 18, 40, 0) 60%
+    ),
+    linear-gradient(
+      180deg,
+      var(--color-hero-bg-start) 0%,
+      var(--color-hero-bg-end) 100%
+    );
 }
 
 .final-cta__inner {
@@ -85,8 +102,8 @@ const emit = defineEmits(['open-demo'])
 
   border-radius: 24px;
 
-  background: #ffffff;
-  color: #019dff;
+  background: var(--color-primary);
+  color: white;
 
   border: none;
   outline: none;
@@ -109,23 +126,20 @@ const emit = defineEmits(['open-demo'])
 .final-cta__button:hover {
   transform: translateY(-2px);
   box-shadow: 0 22px 44px rgba(10, 27, 47, 0.16);
-  background: #f7f9fc;
+  background: var(--color-primary-light);
 }
 
-.final-cta__visual {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.final-cta__gif {
-  display: block;
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  object-fit: contain;
-  user-select: none;
+.final-cta__visual,
+.final-cta__video {
   pointer-events: none;
+}
+
+.final-cta__video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+  mix-blend-mode: screen;
 }
 
 @media (max-width: 1100px) {

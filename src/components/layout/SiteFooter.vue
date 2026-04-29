@@ -51,12 +51,12 @@
               {{ t.footer.primaryCta.label }}
             </button>
 
-            <button
+           <!-- <button
               class="footer__button footer__button--secondary"
               @click="emit('open-demo')"
             >
               {{ t.footer.secondaryCta.label }}
-            </button>
+            </button> -->
           </div>
 
         </div>
@@ -69,14 +69,16 @@
         </div>
 
         <div class="footer__legal">
-          <a
-            v-for="link in t.footer.legal"
-            :key="link.label"
-            :href="link.href"
-            class="footer__legal-link"
-          >
-            {{ link.label }}
-          </a>
+        <a
+          v-for="link in t.footer.legal"
+          :key="link.label"
+          :href="link.href"
+          class="footer__legal-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ link.label }}
+        </a>
         </div>
       </div>
 

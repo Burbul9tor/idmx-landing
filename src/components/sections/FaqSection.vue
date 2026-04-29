@@ -73,10 +73,18 @@ const toggleItem = (index: number) => {
   content: '';
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(circle at 20% 40%, rgba(1, 157, 255, 0.14), transparent 34%),
-    radial-gradient(circle at 80% 60%, rgba(119, 203, 255, 0.08), transparent 30%);
-  pointer-events: none;
+   background:
+    radial-gradient(
+      80% 80% at 50% 20%,
+      rgba(18, 44, 96, 0.28) 0%,
+      rgba(10, 18, 40, 0) 60%
+    ),
+    linear-gradient(
+      180deg,
+      var(--color-hero-bg-start) 0%,
+      var(--color-hero-bg-end) 100%
+    );
+  pointer-events: none; 
 }
 
 .faq__inner {

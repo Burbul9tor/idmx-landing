@@ -438,26 +438,52 @@ const en = {
     title: 'Frequently asked questions',
     items: [
       {
-        question: 'How long does implementation take?',
+         question: 'How long does implementation take?',
         answer:
-  'Depends on the scale and readiness of the infrastructure.\n\n' +
-  'IDMX implementation is carried out in stages: audit of the current infrastructure, requirements gathering, integration with AD/LDAP and HR systems, configuration of the access matrix, role model and approval workflows, testing, administrator training, pilot launch in a single department, followed by full rollout.\n\n' +
-  'For companies with up to 500 employees, the basic setup can be launched within 4–6 weeks. Large enterprises with multiple systems typically require 8–12 weeks.',
+          'It depends on the scale and readiness of your infrastructure.\n\n' +
+          'IDMX implementation is carried out in stages: audit of the current infrastructure, requirements gathering, integration with AD/LDAP and HR systems, configuration of the access matrix, role model and approval workflows, testing, administrator training, pilot launch in a single department, followed by full rollout.\n\n' +
+          'For companies with up to 500 employees, the basic setup can be launched within 4–6 weeks. Large enterprises with multiple systems typically require 8–12 weeks.',
       },
       {
         question: 'Can it be integrated with our systems?',
         answer:
-          'Yes, IDMX supports integration with most corporate solutions, including HR systems, Active Directory, email services, and other data sources.',
+          'Yes, IDMX supports integration with most enterprise systems, including HR platforms, Active Directory, email services, and other data sources.',
       },
       {
-        question: 'Is the solution suitable for large companies?',
+        question: 'Is the solution suitable for large enterprises?',
         answer:
-          'Yes, the system is designed for scalability and stable operation in complex distributed infrastructure with many users and accounts.',
+          'The platform is designed for organizations ranging from 200 to 50,000+ users.\n' +
+          '• IDMX scales horizontally and supports:\n' +
+          '• Multiple AD domains and organizational structures;\n' +
+          '• Access management in distributed holdings with subsidiaries;\n' +
+          '• Delegated administration across business units;\n' +
+          '• Workloads from hundreds to tens of thousands of accounts without performance degradation.',
       },
       {
-        question: 'How is security ensured?',
+        question: 'How is the system itself secured?',
         answer:
-          'Security is ensured through a role-based access model, action logging, centralized control, and transparency of approval and access management processes.',
+          'IDMX follows zero-trust principles — access to the access management system itself is controlled and logged.\n' +
+          'All administrator actions are recorded in an immutable audit log.\n' +
+          'Role-based access control ensures no user has unrestricted privileges without approval.\n' +
+          'MFA is supported for platform access. Data is transmitted via secure channels (TLS 1.2/1.3), and user passwords are protected using cryptographic hashing.\n\n' +
+          'With on-premise deployment, data never leaves the customer’s perimeter.',
+      },
+      {
+        question: 'How can IDMX be deployed — cloud or on-premise?',
+        answer:
+          'On-premise — the system is installed on the customer’s infrastructure.\n' +
+          'Suitable for organizations with strict data residency requirements, including banks and government entities. Full control over data remains with you.',
+      },
+      {
+        question: 'How much does IDMX cost?',
+        answer:
+          'Pricing is individual and depends on the number of users and selected modules.\n' +
+          'The total cost includes:\n' +
+          '• License — based on the number of employees and managed systems;\n' +
+          '• Implementation — one-time project cost;\n' +
+          '• Support — annual technical support contract.\n\n' +
+          'We do not publish fixed pricing because configurations vary significantly: some need only IDM, while others require a full solution including audit and self-service portal.\n' +
+          'Request a demo — after the discussion, we will prepare a commercial proposal within 5 business days.',
       },
     ],
   },
@@ -485,10 +511,10 @@ const en = {
       label: 'Support',
       href: '#support',
     },
-    copyright: '© 2026 IDMX. All rights reserved.',
+    copyright: ' IDMX. Developed by IKOD LLP.',
     legal: [
-      { label: 'Privacy Policy', href: '#' },
-      { label: 'Terms of Use', href: '#' },
+      { label: 'Technical Support Terms', href: 'https://ikod.kz/docs/idmx-support-terms' },
+      { label: 'Terms of Use', href: 'https://ikod.kz/docs/idmx-license-agreement'}
     ],
   },
   demoModal: {
