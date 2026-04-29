@@ -42,6 +42,7 @@
                   class="demo-field__input"
                   :class="{ 'demo-field__input--error': errors.firstName }"
                   :placeholder="t.demoModal.fields.firstName"
+                  :disabled="isSubmitting"
                   @input="errors.firstName = false"
                 />
                 <div v-if="errors.firstName" class="demo-field__error">
@@ -54,19 +55,26 @@
                   v-model.trim="form.lastName"
                   type="text"
                   class="demo-field__input"
+                  :class="{ 'demo-field__input--error': errors.lastName }"
                   :placeholder="t.demoModal.fields.lastName"
+                  :disabled="isSubmitting"
+                  @input="errors.lastName = false"
                 />
+                <div v-if="errors.lastName" class="demo-field__error">
+                  {{ t.demoModal.errors.required }}
+                </div>
               </div>
 
               <div class="demo-field">
                 <input
                   ref="phoneRef"
-                    type="tel"
-                    inputmode="tel"
-                    autocomplete="tel"
-                    class="demo-field__input"
-                    :class="{ 'demo-field__input--error': errors.phone }"
-                    :placeholder="t.demoModal.fields.phone"
+                  type="tel"
+                  inputmode="tel"
+                  autocomplete="tel"
+                  class="demo-field__input"
+                  :class="{ 'demo-field__input--error': errors.phone }"
+                  :placeholder="t.demoModal.fields.phone"
+                  :disabled="isSubmitting"
                 />
                 <div v-if="errors.phone" class="demo-field__error">
                   {{ t.demoModal.errors.phone }}
@@ -81,6 +89,7 @@
                   class="demo-field__input"
                   :class="{ 'demo-field__input--error': errors.email }"
                   :placeholder="t.demoModal.fields.email"
+                  :disabled="isSubmitting"
                   @input="errors.email = false"
                 />
                 <div v-if="errors.email" class="demo-field__error">
@@ -95,6 +104,7 @@
                   class="demo-field__input"
                   :class="{ 'demo-field__input--error': errors.company }"
                   :placeholder="t.demoModal.fields.company"
+                  :disabled="isSubmitting"
                   @input="errors.company = false"
                 />
                 <div v-if="errors.company" class="demo-field__error">
@@ -108,16 +118,21 @@
                 v-model.trim="form.comment"
                 class="demo-field__textarea"
                 :placeholder="t.demoModal.fields.comment"
+                :disabled="isSubmitting"
               />
             </div>
+
+            <p v-if="submitError" class="demo-modal__error-global">
+              {{ submitError }}
+            </p>
 
             <div class="demo-modal__footer">
               <p class="demo-modal__note">
                 {{ t.demoModal.note }}
               </p>
 
-              <BaseButton variant="primary" type="submit">
-                {{ t.demoModal.submit }}
+              <BaseButton variant="primary" type="submit" :disabled="isSubmitting">
+                {{ isSubmitting ? 'Отправка...' : t.demoModal.submit }}
               </BaseButton>
             </div>
           </form>
@@ -151,6 +166,8 @@ import lottie from 'lottie-web'
 import successCheck from '../../assets/animations/success-check.json'
 import IMask from 'imask'
 
+const MAIL_API_URL = 'https://idmx.kz/mail/send.php'
+
 const phoneRef = ref<HTMLInputElement | null>(null)
 let phoneMask: ReturnType<typeof IMask> | null = null
 
@@ -160,14 +177,6 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: boolean): void
-  (e: 'submit', value: {
-    firstName: string
-    lastName: string
-    phone: string
-    email: string
-    company: string
-    comment: string
-  }): void
 }>()
 
 const { t } = useLocale()
@@ -183,26 +192,32 @@ const form = reactive({
 
 const errors = reactive({
   firstName: false,
+  lastName: false,
   phone: false,
   email: false,
   company: false,
 })
 
 const isSuccess = ref(false)
+const isSubmitting = ref(false)
+const submitError = ref('')
 
 const successIconRef = ref<HTMLDivElement | null>(null)
 let successAnimation: ReturnType<typeof lottie.loadAnimation> | null = null
 
 const clearErrors = () => {
   errors.firstName = false
+  errors.lastName = false
   errors.phone = false
   errors.email = false
   errors.company = false
+  submitError.value = ''
 }
 
 const close = () => {
   emit('update:modelValue', false)
   isSuccess.value = false
+  isSubmitting.value = false
   clearErrors()
   successAnimation?.destroy()
   successAnimation = null
@@ -222,6 +237,7 @@ const resetForm = () => {
 
   clearErrors()
 }
+
 const initPhoneMask = async () => {
   await nextTick()
 
@@ -245,23 +261,92 @@ const destroyPhoneMask = () => {
   phoneMask?.destroy()
   phoneMask = null
 }
+
 const validateForm = () => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
   errors.firstName = !form.firstName.trim()
+  errors.lastName = !form.lastName.trim()
   errors.phone = (phoneMask?.unmaskedValue.length ?? 0) !== 11
   errors.email = !emailRegex.test(form.email)
   errors.company = !form.company.trim()
 
-  return !errors.firstName && !errors.phone && !errors.email && !errors.company
+  return (
+    !errors.firstName &&
+    !errors.lastName &&
+    !errors.phone &&
+    !errors.email &&
+    !errors.company
+  )
 }
 
-const submit = () => {
+const getSubmitErrorMessage = async (response: Response) => {
+  try {
+    const result = await response.json()
+
+    if (result.errors) {
+      return Object.values(result.errors).join('\n')
+    }
+
+    return result.message || 'Не удалось отправить заявку.'
+  } catch {
+    return 'Не удалось обработать ответ сервера.'
+  }
+}
+
+const submit = async () => {
+  if (isSubmitting.value) return
   if (!validateForm()) return
 
-  emit('submit', { ...form })
-  resetForm()
-  isSuccess.value = true
+  submitError.value = ''
+  isSubmitting.value = true
+
+  const note = [
+    form.company ? `Компания: ${form.company}` : '',
+    form.comment ? `Комментарий: ${form.comment}` : '',
+  ]
+    .filter(Boolean)
+    .join('\n\n')
+
+  try {
+    const response = await fetch(MAIL_API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        lastname: form.lastName,
+        firstname: form.firstName,
+        phone: form.phone,
+        email: form.email,
+        note,
+      }),
+    })
+
+    if (!response.ok) {
+      submitError.value = await getSubmitErrorMessage(response)
+      return
+    }
+
+    const result = await response.json()
+
+    if (!result.success) {
+      if (result.errors) {
+        submitError.value = Object.values(result.errors).join('\n')
+      } else {
+        submitError.value = result.message || 'Не удалось отправить заявку.'
+      }
+      return
+    }
+
+    resetForm()
+    isSuccess.value = true
+  } catch (error) {
+    submitError.value = 'Ошибка соединения с сервером. Попробуйте позже.'
+    console.error(error)
+  } finally {
+    isSubmitting.value = false
+  }
 }
 
 const onKeydown = (event: KeyboardEvent) => {
@@ -295,6 +380,7 @@ watch(
 
     if (isOpen) {
       isSuccess.value = false
+      isSubmitting.value = false
       clearErrors()
       successAnimation?.destroy()
       successAnimation = null
@@ -317,7 +403,6 @@ onUnmounted(() => {
   destroyPhoneMask()
   successAnimation?.destroy()
 })
-
 </script>
 
 <style scoped>
@@ -338,7 +423,7 @@ onUnmounted(() => {
   width: min(780px, 100%);
   max-height: calc(100vh - 48px);
   overflow: auto;
-    padding: 28px 28px 24px;
+  padding: 28px 28px 24px;
   border-radius: 28px;
   border: 1px solid rgba(1, 157, 255, 0.12);
   background:
@@ -435,7 +520,8 @@ onUnmounted(() => {
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease,
-    background 0.2s ease;
+    background 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .demo-field__input {
@@ -452,6 +538,12 @@ onUnmounted(() => {
   resize: vertical;
   font-size: 16px;
   line-height: 1.45;
+}
+
+.demo-field__input:disabled,
+.demo-field__textarea:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
 }
 
 .demo-field__input:focus,
@@ -481,6 +573,18 @@ onUnmounted(() => {
   color: #718396;
 }
 
+.demo-modal__error-global {
+  margin: -2px 0 0;
+  padding: 12px 14px;
+  border: 1px solid rgba(224, 75, 75, 0.22);
+  border-radius: 14px;
+  background: rgba(224, 75, 75, 0.07);
+  color: #c73535;
+  font-size: 14px;
+  line-height: 1.45;
+  white-space: pre-line;
+}
+
 .demo-modal__footer {
   display: flex;
   align-items: center;
@@ -506,21 +610,23 @@ onUnmounted(() => {
   padding-top: 8px;
   animation: successFade 0.4s ease;
 }
+
 .demo-modal__success-icon {
   width: 100px;
   height: 100px;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1px;
 }
+
 .demo-modal__success .demo-modal__title {
   font-size: 28px;
   font-weight: 700;
   line-height: 1.25;
   margin-bottom: 12px;
 }
+
 .demo-modal__success .demo-modal__subtitle {
   font-size: 20px;
   line-height: 1.5;
@@ -528,10 +634,10 @@ onUnmounted(() => {
   max-width: 420px;
   margin-bottom: 36px;
 }
+
 .demo-modal__success .base-button {
   margin-top: 8px;
 }
-
 
 .demo-modal-fade-enter-active,
 .demo-modal-fade-leave-active {
@@ -556,15 +662,16 @@ onUnmounted(() => {
   transform: translateY(10px) scale(0.985);
 }
 
-.demo-toast-fade-enter-active,
-.demo-toast-fade-leave-active {
-  transition: opacity 0.22s ease, transform 0.22s ease;
-}
+@keyframes successFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
 
-.demo-toast-fade-enter-from,
-.demo-toast-fade-leave-to {
-  opacity: 0;
-  transform: translateX(-50%) translateY(8px);
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 768px) {
@@ -616,19 +723,6 @@ onUnmounted(() => {
   .demo-modal__note {
     max-width: none;
     font-size: 13px;
-  }
-
-  .demo-toast {
-    left: 14px;
-    right: 14px;
-    bottom: 14px;
-    transform: none;
-    text-align: center;
-  }
-
-  .demo-toast-fade-enter-from,
-  .demo-toast-fade-leave-to {
-    transform: translateY(8px);
   }
 }
 </style>
