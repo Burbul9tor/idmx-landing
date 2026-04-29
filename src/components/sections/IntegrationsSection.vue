@@ -16,7 +16,6 @@
       </div>
 
       <div class="integrations__body">
-        <!-- ЦЕНТР -->
         <article class="integrations__hub">
           <div class="integrations__hub-logo">
             <img :src="idmxLogo" alt="IDMX" />
@@ -35,58 +34,79 @@
           </div>
         </article>
 
-        <!-- КАРТОЧКИ -->
         <div class="integrations__list">
-          <!-- AD -->
           <article class="integration-card">
             <div class="integration-card__icon">
-              <img :src="adIcon" :alt="t.integrations.items.top.title" loading="lazy"
-                decoding="async" />
+              <img
+                :src="adIcon"
+                :alt="t.integrations.items.top.title"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
-            <div>
+
+            <div class="integration-card__content">
               <h3>{{ t.integrations.items.top.title }}</h3>
               <p>{{ t.integrations.items.top.text }}</p>
             </div>
           </article>
 
-          <!-- HR -->
           <article class="integration-card">
             <div class="integration-card__icon">
-              <img :src="hrIcon" :alt="t.integrations.items.left.title" />
+              <img
+                :src="hrIcon"
+                :alt="t.integrations.items.left.title"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
-            <div>
+
+            <div class="integration-card__content">
               <h3>{{ t.integrations.items.left.title }}</h3>
               <p>{{ t.integrations.items.left.text }}</p>
             </div>
           </article>
 
-          <!-- ERP -->
           <article class="integration-card">
             <div class="integration-card__icon">
-              <img :src="erpIcon" :alt="t.integrations.items.right.title" />
+              <img
+                :src="erpIcon"
+                :alt="t.integrations.items.right.title"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
-            <div>
+
+            <div class="integration-card__content">
               <h3>{{ t.integrations.items.right.title }}</h3>
               <p>{{ t.integrations.items.right.text }}</p>
             </div>
           </article>
 
-          <!-- MAIL -->
           <article class="integration-card">
             <div class="integration-card__icon">
-              <img :src="mailIcon" :alt="t.integrations.items.bottomLeft.title" />
+              <img
+                :src="mailIcon"
+                :alt="t.integrations.items.bottomLeft.title"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
-            <div>
+
+            <div class="integration-card__content">
               <h3>{{ t.integrations.items.bottomLeft.title }}</h3>
               <p>{{ t.integrations.items.bottomLeft.text }}</p>
             </div>
           </article>
 
-          <!-- APPS (ГЛАВНОЕ ИЗМЕНЕНИЕ) -->
           <article class="integration-card integration-card--apps">
-            
             <div class="integration-card__apps-image">
-              <img :src="appsIcon" :alt="t.integrations.items.bottomRight.title" />
+              <img
+                :src="appsIcon"
+                :alt="t.integrations.items.bottomRight.title"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
 
             <h3>
@@ -96,7 +116,6 @@
             <p>
               {{ t.integrations.items.bottomRight.text }}
             </p>
-
           </article>
         </div>
       </div>
@@ -219,7 +238,7 @@ const { t } = useLocale()
     radial-gradient(circle at 50% 10%, rgba(1, 157, 255, 0.22), transparent 52%),
     rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(1, 157, 255, 0.22);
-  box-shadow: 0 0 40px rgba(1,157,255,0.12);
+  box-shadow: 0 0 40px rgba(1, 157, 255, 0.12);
   cursor: pointer;
 }
 
@@ -295,78 +314,36 @@ const { t } = useLocale()
   grid-area: mail;
 }
 
-
-.integration-card__apps-image {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 100%;
-  max-width: 420px;
-  margin-bottom: 16px;
-  padding: 12px;
-  border-radius: 58px;
-
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.08);
-}
-.integration-card__apps-image img {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-   filter:
-    grayscale(100%)
-    brightness(0.85)
-    contrast(1.1)
-    sepia(1)
-    hue-rotate(180deg)
-    saturate(1.2);
-  transition: all 0.3s ease;
-  opacity: 0.7;
-  display: block;
-}
-.integration-card--apps:hover .integration-card__apps-image img {
-  filter: none;
-  opacity: 1;
-  cursor: pointer;
-}
-
 .integration-card {
-  display: grid;
-  grid-template-columns: 72px 1fr;
-  gap: 18px;
-  align-items: flex-start;
+  display: flex;
+  flex-direction: column;  
+  align-items: center;       
+  justify-content: center;  
+
+  text-align: center;         
+
+  gap: 16px;
+
   min-height: 190px;
   padding: 28px;
   border-radius: 26px;
+
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(220, 236, 255, 0.1);
   box-shadow: var(--shadow-card);
+
   transition:
     transform 0.25s ease,
     border-color 0.25s ease,
     box-shadow 0.25s ease,
     background 0.25s ease;
 }
-.integration-card--apps {
-  grid-area: apps;
-  width: 100%;
-  justify-self: stretch;
 
+.integration-card__content {
   display: flex;
+  min-width: 0;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-
-  min-height: auto;
-   padding: 24px 56px 24px;
-
-  background:
-    radial-gradient(circle at 50% 0%, rgba(1,157,255,0.15), transparent 60%),
-    rgba(255,255,255,0.05);
-
-  border-color: rgba(1,157,255,0.25);
+  justify-content: center;
 }
 
 .integration-card:hover {
@@ -374,11 +351,11 @@ const { t } = useLocale()
   border-color: rgba(1, 157, 255, 0.35);
   box-shadow: 0 10px 30px rgba(1, 157, 255, 0.15);
   cursor: pointer;
-
 }
 
 .integration-card__icon {
   position: relative;
+  flex: 0 0 72px;
   width: 72px;
   height: 72px;
   display: flex;
@@ -421,16 +398,74 @@ const { t } = useLocale()
   letter-spacing: -0.03em;
 }
 
-.integration-card--apps h3 {
-  margin-bottom: 10px;
-  font-size: 28px;
-}
-
 .integration-card p {
   margin: 0;
   color: rgba(220, 236, 255, 0.72);
   font-size: 15px;
   line-height: 1.55;
+}
+
+.integration-card__apps-image {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  max-width: 420px;
+  margin-bottom: 16px;
+  padding: 12px;
+  border-radius: 58px;
+
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.integration-card__apps-image img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  filter:
+    grayscale(100%)
+    brightness(0.85)
+    contrast(1.1)
+    sepia(1)
+    hue-rotate(180deg)
+    saturate(1.2);
+  transition: all 0.3s ease;
+  opacity: 0.7;
+  display: block;
+}
+
+.integration-card--apps {
+  grid-area: apps;
+  width: 100%;
+  justify-self: stretch;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  min-height: auto;
+  padding: 24px 56px;
+
+  background:
+    radial-gradient(circle at 50% 0%, rgba(1, 157, 255, 0.15), transparent 60%),
+    rgba(255, 255, 255, 0.05);
+
+  border-color: rgba(1, 157, 255, 0.25);
+}
+
+.integration-card--apps:hover .integration-card__apps-image img {
+  filter: none;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.integration-card--apps h3 {
+  margin-bottom: 10px;
+  font-size: 28px;
 }
 
 @media (max-width: 1180px) {
@@ -493,12 +528,12 @@ const { t } = useLocale()
   }
 
   .integration-card {
-    grid-template-columns: 60px 1fr;
     gap: 16px;
     min-height: auto;
   }
 
   .integration-card__icon {
+    flex-basis: 60px;
     width: 60px;
     height: 60px;
   }
@@ -510,6 +545,10 @@ const { t } = useLocale()
 
   .integration-card h3 {
     font-size: 18px;
+  }
+
+  .integration-card--apps {
+    padding: 24px;
   }
 }
 </style>

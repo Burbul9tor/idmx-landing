@@ -685,10 +685,12 @@ const setActive = (index: number) => {
     padding: 4px 0 12px;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
+    
   }
 
   .scenarios__list::-webkit-scrollbar {
     display: none;
+    box-shadow: none;
   }
 
   .scenario-card {
@@ -696,6 +698,7 @@ const setActive = (index: number) => {
     scroll-snap-align: start;
     padding: 16px;
     border-radius: 20px;
+    box-shadow: none;
   }
 
   .scenario-card__icon {

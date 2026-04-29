@@ -132,7 +132,7 @@ const toggleItem = (index: number) => {
   font-size: var(--font-size-title);
   font-weight: 800;
   line-height: 1.08;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.01em;
 }
 
 .faq__list {
