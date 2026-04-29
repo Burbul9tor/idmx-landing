@@ -3,7 +3,7 @@
     <div class="container header__inner">
       
       <!-- LOGO -->
-      <div class="logo">
+      <div class="logo" @click="scrollToTop">
         <img :src="logo" alt="IDMX" />
       </div>
 
@@ -46,6 +46,13 @@ const { t } = useLocale()
 
 const isScrolled = ref(false)
 const isDemoModalOpen = ref(false)
+
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  })
+}
 
 function handleScroll() {
   isScrolled.value = window.scrollY > 10
