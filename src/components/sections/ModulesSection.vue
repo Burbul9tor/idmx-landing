@@ -212,6 +212,10 @@ onMounted(() => {
 
   window.addEventListener('keydown', onKeydown)
 })
+onBeforeUnmount(() => {
+  document.body.style.overflow = ''
+  window.removeEventListener('keydown', onKeydown)
+})
 </script>
 
 <style scoped>
