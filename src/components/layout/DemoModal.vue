@@ -125,13 +125,37 @@
             <p v-if="submitError" class="demo-modal__error-global">
               {{ submitError }}
             </p>
+            <label class="demo-modal__consent">
+            <input
+              v-model="isConsentAccepted"
+              type="checkbox"
+              class="demo-modal__checkbox-hidden"
+            />
+
+            <span class="demo-modal__checkbox"></span>
+
+            <span class="demo-modal__consent-text">
+              {{ t.demoModal.consent }}
+            </span>
+          </label>
+
+            <p
+              v-if="consentError"
+              class="demo-modal__consent-error"
+            >
+              {{ consentError }}
+            </p>
 
             <div class="demo-modal__footer">
               <p class="demo-modal__note">
                 {{ t.demoModal.note }}
               </p>
 
-              <BaseButton variant="primary" type="submit" :disabled="isSubmitting">
+              <BaseButton
+                variant="primary"
+                type="submit"
+                :disabled="isSubmitting"
+              >
                 {{ isSubmitting ? 'Отправка...' : t.demoModal.submit }}
               </BaseButton>
             </div>
@@ -168,9 +192,6 @@ import IMask from 'imask'
 
 const MAIL_API_URL = 'https://idmx.kz/mail/send.php'
 
-const phoneRef = ref<HTMLInputElement | null>(null)
-let phoneMask: ReturnType<typeof IMask> | null = null
-
 const props = defineProps<{
   modelValue: boolean
 }>()
@@ -180,6 +201,11 @@ const emit = defineEmits<{
 }>()
 
 const { t } = useLocale()
+
+const isConsentAccepted = ref(false)
+const consentError = ref('')
+const phoneRef = ref<HTMLInputElement | null>(null)
+let phoneMask: ReturnType<typeof IMask> | null = null
 
 const form = reactive({
   firstName: '',
@@ -219,6 +245,7 @@ const close = () => {
   isSuccess.value = false
   isSubmitting.value = false
   clearErrors()
+  consentError.value = ''
   successAnimation?.destroy()
   successAnimation = null
 }
@@ -236,6 +263,8 @@ const resetForm = () => {
   }
 
   clearErrors()
+  isConsentAccepted.value = false
+  consentError.value = ''
 }
 
 const initPhoneMask = async () => {
@@ -296,7 +325,17 @@ const getSubmitErrorMessage = async (response: Response) => {
 
 const submit = async () => {
   if (isSubmitting.value) return
-  if (!validateForm()) return
+
+  const isFormValid = validateForm()
+  const isConsentValid = isConsentAccepted.value
+
+  if (!isConsentValid) {
+    consentError.value = t.value.demoModal.consentError
+  } else {
+    consentError.value = ''
+  }
+
+  if (!isFormValid || !isConsentValid) return
 
   submitError.value = ''
   isSubmitting.value = true
@@ -382,6 +421,7 @@ watch(
       isSuccess.value = false
       isSubmitting.value = false
       clearErrors()
+      consentError.value = ''
       successAnimation?.destroy()
       successAnimation = null
 
@@ -404,7 +444,6 @@ onUnmounted(() => {
   successAnimation?.destroy()
 })
 </script>
-
 <style scoped>
 .demo-modal {
   position: fixed;
@@ -660,6 +699,62 @@ onUnmounted(() => {
 .demo-modal-fade-leave-to .demo-modal__dialog {
   opacity: 0;
   transform: translateY(10px) scale(0.985);
+}
+
+.demo-modal__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 12px;
+  cursor: pointer;
+}
+
+.demo-modal__consent-checkbox {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  flex: 0 0 auto;
+  accent-color: var(--color-primary);
+}
+
+.demo-modal__consent-text {
+  color: var(--color-subtitle);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.demo-modal__consent-error {
+  margin: 4px 0 0;
+  color: var(--color-red);
+  font-size: 12px;
+}
+.demo-modal__checkbox-hidden {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.demo-modal__checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--color-primary);
+  border-radius: 4px;
+  background: #fff;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+
+.demo-modal__checkbox-hidden:checked + .demo-modal__checkbox::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 6px;
+  height: 10px;
+  border: solid var(--color-primary); 
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
 
 @keyframes successFade {

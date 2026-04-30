@@ -544,6 +544,8 @@ const en = {
       send: 'Failed to send the request.',
       response: 'Failed to process the server response.',
     },
+consent: 'By submitting the request, I consent to the processing of my personal data',
+consentError: 'You need to consent to the processing of personal data', 
 
   },
 } as const
