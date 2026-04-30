@@ -19,25 +19,25 @@
       </div>
 
       <div
-  ref="tabsRef"
-  class="modules__tabs"
-  role="tablist"
-  aria-label="Modules navigation"
->
-  <button
-    v-for="(item, index) in modules"
-    :key="item.title"
-    :ref="(el) => setTabRef(el, index)"
-    type="button"
-    class="modules__tab"
-    :class="{ 'modules__tab--active': activeIndex === index }"
-    :aria-selected="activeIndex === index"
-    :tabindex="activeIndex === index ? 0 : -1"
-    @click="setActive(index)"
-  >
-    {{ item.title }}
-  </button>
-</div>
+        ref="tabsRef"
+        class="modules__tabs"
+        role="tablist"
+        aria-label="Modules navigation"
+      >
+        <button
+          v-for="(item, index) in modules"
+          :key="item.title"
+          :ref="(el) => setTabRef(el, index)"
+          type="button"
+          class="modules__tab"
+          :class="{ 'modules__tab--active': activeIndex === index }"
+          :aria-selected="activeIndex === index"
+          :tabindex="activeIndex === index ? 0 : -1"
+          @click="setActive(index)"
+        >
+          {{ item.title }}
+        </button>
+      </div>
 
       <div class="modules__content">
         <div class="modules__info">
@@ -83,15 +83,19 @@
               </div>
 
               <div class="modules__screen-preview">
-                <img
-                  :key="activeModule.image"
-                  :src="activeModule.image"
-                  :alt="activeModule.title"
-                  loading="eager"
-                  decoding="async"
-                  class="modules__screen-image"
-                  @click="isPreviewOpen = true"
-                />
+                  <img
+                    :src="currentImage"
+                    :alt="activeModule.title"
+                    loading="eager"
+                    decoding="async"
+                    class="modules__screen-image"
+                    @click="isPreviewOpen = true"
+                  />
+                  <div
+                    v-if="isImageLoading"
+                    class="modules__image-loader"
+                  >
+                  </div>
               </div>
             </div>
           </div>
@@ -115,7 +119,7 @@
         </button>
 
         <img
-          :src="activeModule.image"
+          :src="currentImage"
           :alt="activeModule.title"
           class="modules__lightbox-image"
           @click.stop
@@ -136,17 +140,19 @@ import {
 } from 'vue'
 import { useLocale } from '../../composables/useLocale'
 
-import matrixScreen from '../../assets/modules/module-matrix.png'
-import idmScreen from '../../assets/modules/module-idm.png'
-import portalScreen from '../../assets/modules/module-portal.png'
-import auditScreen from '../../assets/modules/module-audit.png'
+import matrixScreen from '../../assets/modules/module-matrix.webp'
+import idmScreen from '../../assets/modules/module-idm.webp'
+import portalScreen from '../../assets/modules/module-portal.webp'
+import auditScreen from '../../assets/modules/module-audit.webp'
 
 const { t } = useLocale()
 
 const activeIndex = ref(0)
 const isPreviewOpen = ref(false)
+const isImageLoading = ref(false)
 const tabsRef = ref<HTMLElement | null>(null)
 const tabRefs = ref<HTMLButtonElement[]>([])
+const currentImage = ref<string>(matrixScreen)
 
 const moduleImages = [
   matrixScreen,
@@ -194,6 +200,26 @@ const setActive = (index: number) => {
   })
 }
 
+watch(
+  () => activeModule.value.image,
+  (newImage) => {
+    if (!newImage || newImage === currentImage.value) return
+
+     isImageLoading.value = true
+
+    const img = new Image()
+    img.src = newImage
+
+    img.onload = () => {
+      currentImage.value = newImage
+      isImageLoading.value = false
+    }
+      img.onerror = () => {
+      isImageLoading.value = false
+    }
+  }
+)
+
 watch(isPreviewOpen, (isOpen) => {
   document.body.style.overflow = isOpen ? 'hidden' : ''
 })
@@ -212,6 +238,7 @@ onMounted(() => {
 
   window.addEventListener('keydown', onKeydown)
 })
+
 onBeforeUnmount(() => {
   document.body.style.overflow = ''
   window.removeEventListener('keydown', onKeydown)
@@ -544,6 +571,21 @@ onBeforeUnmount(() => {
 .modules__lightbox-close:hover {
   background: rgba(255, 255, 255, 0.12);
   transform: scale(1.05);
+}
+
+.modules__image-loader {
+  position: absolute;
+  inset: 12px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(6, 14, 32, 0.48);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  pointer-events: none;
 }
 
 @keyframes fadeIn {
