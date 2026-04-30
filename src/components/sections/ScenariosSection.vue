@@ -700,6 +700,12 @@ const setActive = (index: number) => {
     border-radius: 20px;
     box-shadow: none;
   }
+   .scenario-card--active {
+    box-shadow: none;
+  }
+   .scenario-card:hover {
+    box-shadow: none;
+  }
 
   .scenario-card__icon {
     width: 52px;

@@ -540,7 +540,11 @@ const en = {
       required: 'Required field',
       email: 'Enter a valid email',
       phone: 'Enter a valid phone number',
+      server: 'Server connection error. Please try again later.',
+      send: 'Failed to send the request.',
+      response: 'Failed to process the server response.',
     },
+
   },
 } as const
 

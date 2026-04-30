@@ -290,7 +290,7 @@ const getSubmitErrorMessage = async (response: Response) => {
 
     return result.message || 'Не удалось отправить заявку.'
   } catch {
-    return 'Не удалось обработать ответ сервера.'
+    return t.value.demoModal.errors.response
   }
 }
 
@@ -334,7 +334,7 @@ const submit = async () => {
       if (result.errors) {
         submitError.value = Object.values(result.errors).join('\n')
       } else {
-        submitError.value = result.message || 'Не удалось отправить заявку.'
+        submitError.value = result.message || t.value.demoModal.errors.send
       }
       return
     }
@@ -342,7 +342,7 @@ const submit = async () => {
     resetForm()
     isSuccess.value = true
   } catch (error) {
-    submitError.value = 'Ошибка соединения с сервером. Попробуйте позже.'
+    submitError.value = t.value.demoModal.errors.server
     console.error(error)
   } finally {
     isSubmitting.value = false
@@ -676,14 +676,17 @@ onUnmounted(() => {
 
 @media (max-width: 768px) {
   .demo-modal {
-    padding: 14px;
-    align-items: flex-end;
+    align-items: flex-start;
+    padding: max(18px, env(safe-area-inset-top)) 14px max(14px, env(safe-area-inset-bottom));
+    overflow-y: auto;
   }
 
   .demo-modal__dialog {
-    max-height: calc(100vh - 20px);
+    width: 100%;
+    max-height: none;
+    margin: auto 0;
     padding: 24px 18px 20px;
-    border-radius: 24px 24px 0 0;
+    border-radius: 24px;
   }
 
   .demo-modal__head {
