@@ -84,8 +84,10 @@
 
               <div class="modules__screen-preview">
                 <img
+                  :key="activeModule.image"
                   :src="activeModule.image"
                   :alt="activeModule.title"
+                  loading="eager"
                   decoding="async"
                   class="modules__screen-image"
                   @click="isPreviewOpen = true"
@@ -203,12 +205,12 @@ const onKeydown = (event: KeyboardEvent) => {
 }
 
 onMounted(() => {
-  window.addEventListener('keydown', onKeydown)
-})
+  moduleImages.forEach((src) => {
+    const img = new Image()
+    img.src = src
+  })
 
-onBeforeUnmount(() => {
-  document.body.style.overflow = ''
-  window.removeEventListener('keydown', onKeydown)
+  window.addEventListener('keydown', onKeydown)
 })
 </script>
 
@@ -468,6 +470,7 @@ onBeforeUnmount(() => {
 }
 
 .modules__screen-image {
+  animation: moduleImageFade 0.22s ease;
   display: block;
   width: 100%;
    max-width: none;
@@ -560,6 +563,17 @@ onBeforeUnmount(() => {
     transform: scale(1);
   }
 }
+@keyframes moduleImageFade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 @media (max-width: 1100px) {
   .modules__content {
@@ -640,9 +654,6 @@ onBeforeUnmount(() => {
 .modules__stage:hover .modules__screen-shell {
   transform: scale(1.04);
 }
- .modules__stage:hover .modules__screen-shell {
-    transform: scale(1.04);
-  }
 
   .modules__screen-topbar {
     padding: 16px 18px;
