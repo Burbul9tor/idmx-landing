@@ -139,6 +139,7 @@
                     ref="phoneRef"
                     v-model="form.phone"
                     class="phone-field__input"
+                    :class="{ 'phone-field__input--empty': isPhoneEmpty }"
                     type="tel"
                     :placeholder="selectedPhoneCountry.placeholder"
                     :disabled="isSubmitting"
@@ -337,6 +338,7 @@ const isConsentAccepted = ref(false)
 const consentError = ref('')
 const phoneRef = ref<HTMLInputElement | null>(null)
 const phoneFieldRef = ref<HTMLDivElement | null>(null)
+const isPhoneEmpty = ref(true)
 
 let phoneMask: ReturnType<typeof IMask> | null = null
 
@@ -438,7 +440,7 @@ const initPhoneMask = async () => {
 
   phoneMask.on('accept', () => {
     form.phone = phoneMask?.value || ''
-
+isPhoneEmpty.value = (phoneMask?.unmaskedValue.length ?? 0) <= 1
     if (errors.phone) {
       errors.phone = (phoneMask?.unmaskedValue.length ?? 0) < 8
     }
@@ -1000,7 +1002,7 @@ onUnmounted(() => {
   align-items: center;
   gap: 6px;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 500;
   white-space: nowrap;
 }
 
@@ -1103,6 +1105,13 @@ onUnmounted(() => {
   border-radius: 4px;
   object-fit: cover;
  
+}
+.phone-field__input--empty {
+  color: var(--color-subtitle);
+}
+
+.phone-field__input:focus {
+  color: #23384d;
 }
 
 @keyframes successFade {
