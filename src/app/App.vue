@@ -11,6 +11,7 @@
       <HowItWorksSection />
       <ModulesSection />
       <BusinessEffectsSection />
+      <ComplianceSection />
       <IntegrationsSection />
       <ScenariosSection />
       <FinalCtaSection @open-demo="openDemoModal" />
@@ -40,6 +41,7 @@ import IntegrationsSection from '../components/sections/IntegrationsSection.vue'
 import ScenariosSection from '../components/sections/ScenariosSection.vue'
 import FinalCtaSection from '../components/sections/FinalCtaSection.vue'
 import FaqSection from '../components/sections/FaqSection.vue'
+import ComplianceSection from '../components/sections/ComplianceSection.vue'
 
 const loading = ref(true)
 const isDemoModalOpen = ref(false)

@@ -240,6 +240,19 @@ const en = {
       },
     ],
   },
+compliance: {
+  eyebrow: 'Compliance & Security',
+  title: 'Security verified',
+  subtitle: 'IDMX complies with international standards and undergoes independent security assessment',
+
+  certLabel: 'Certification',
+  certTitle: 'ISO/IEC 15408-3:2017 (EAL4)',
+ certText: 'IDMX has a verified 4 assurance level — a recognized standard for evaluating IT product security, including design, testing, and vulnerability analysis',
+
+  hubLabel: 'Member',
+  hubTitle: 'Astana Hub',
+  hubText: 'IDMX is a member of Astana Hub, the international technopark of IT startups'
+},
 
   integrations: {
     eyebrow: 'Integrations',
