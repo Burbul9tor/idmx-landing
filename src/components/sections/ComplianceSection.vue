@@ -145,7 +145,7 @@ const { t } = useLocale()
 .compliance-card {
   display: flex;
   gap: 24px;
-  min-height: 200px;
+  min-height: 190px;
   padding: 28px;
   border-radius: 24px;
   background: var(--white);

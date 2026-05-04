@@ -251,7 +251,7 @@ compliance: {
 
   hubLabel: 'Member',
   hubTitle: 'Astana Hub',
-  hubText: 'IDMX is a member of Astana Hub, the international technopark of IT startups'
+  hubText: 'Astana Hub resident since 2021 — contributing to the ecosystem of Kazakhstan’s largest IT technopark'
 },
 
   integrations: {
@@ -559,8 +559,12 @@ compliance: {
     },
 consent: 'By submitting the request, I consent to the processing of my personal data',
 consentError: 'You need to consent to the processing of personal data', 
-
+submitLoading: 'Sending...',
   },
+
+phone: {
+  other: 'Other'
+},
 } as const
 
 export default en

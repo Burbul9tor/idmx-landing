@@ -45,6 +45,7 @@
                   :disabled="isSubmitting"
                   @input="errors.firstName = false"
                 />
+
                 <div v-if="errors.firstName" class="demo-field__error">
                   {{ t.demoModal.errors.required }}
                 </div>
@@ -60,24 +61,93 @@
                   :disabled="isSubmitting"
                   @input="errors.lastName = false"
                 />
+
                 <div v-if="errors.lastName" class="demo-field__error">
                   {{ t.demoModal.errors.required }}
                 </div>
               </div>
 
               <div class="demo-field">
-                <input
-                  ref="phoneRef"
-                  type="tel"
-                  inputmode="tel"
-                  autocomplete="tel"
-                  class="demo-field__input"
-                  :class="{ 'demo-field__input--error': errors.phone }"
-                  :placeholder="t.demoModal.fields.phone"
-                  :disabled="isSubmitting"
-                />
+                <div
+                  ref="phoneFieldRef"
+                  class="phone-field"
+                  :class="{ 'phone-field--error': errors.phone }"
+                >
+                  <button
+                    type="button"
+                    class="phone-select"
+                    :disabled="isSubmitting"
+                    @click="togglePhoneDropdown"
+                  >
+                    <span class="phone-select__value">
+                      <img
+                        :src="selectedPhoneCountry.flag"
+                        :alt="selectedPhoneCountry.label"
+                        class="phone-select__flag"
+                      />
+                      <span>{{ selectedPhoneCountry.label }}</span>
+                      <span>{{ selectedPhoneCountry.prefix }}</span>
+                    </span>
+
+                    <span
+                      class="phone-select__arrow"
+                      :class="{ 'phone-select__arrow--open': isPhoneDropdownOpen }"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path
+                          d="M3.5 5.5L7 9L10.5 5.5"
+                          stroke="currentColor"
+                          stroke-width="1.6"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </span>
+                  </button>
+
+                  <div
+                    v-if="isPhoneDropdownOpen"
+                    class="phone-select__dropdown"
+                  >
+                    <button
+                      v-for="country in phoneCountries"
+                      :key="country.code"
+                      type="button"
+                      class="phone-select__option"
+                      :class="{
+                        'phone-select__option--active':
+                          country.code === selectedPhoneCountry.code
+                      }"
+                      @click="selectPhoneCountry(country)"
+                    >
+                     <span class="phone-select__option-main">
+                      <img
+                        :src="country.flag"
+                        :alt="country.label"
+                        class="phone-select__flag"
+                      />
+                      <span>{{ country.label }}</span>
+                    </span>
+
+                      <span class="phone-select__prefix">
+                        {{ country.prefix }}
+                      </span>
+                    </button>
+                  </div>
+
+                  <input
+                    ref="phoneRef"
+                    v-model="form.phone"
+                    class="phone-field__input"
+                    type="tel"
+                    :placeholder="selectedPhoneCountry.placeholder"
+                    :disabled="isSubmitting"
+                    @input="errors.phone = false"
+                  />
+                </div>
+
                 <div v-if="errors.phone" class="demo-field__error">
-                  {{ t.demoModal.errors.phone }}
+                  {{ t.demoModal.errors.required }}
                 </div>
               </div>
 
@@ -92,6 +162,7 @@
                   :disabled="isSubmitting"
                   @input="errors.email = false"
                 />
+
                 <div v-if="errors.email" class="demo-field__error">
                   {{ t.demoModal.errors.email }}
                 </div>
@@ -107,6 +178,7 @@
                   :disabled="isSubmitting"
                   @input="errors.company = false"
                 />
+
                 <div v-if="errors.company" class="demo-field__error">
                   {{ t.demoModal.errors.required }}
                 </div>
@@ -125,24 +197,22 @@
             <p v-if="submitError" class="demo-modal__error-global">
               {{ submitError }}
             </p>
+
             <label class="demo-modal__consent">
-            <input
-              v-model="isConsentAccepted"
-              type="checkbox"
-              class="demo-modal__checkbox-hidden"
-            />
+              <input
+                v-model="isConsentAccepted"
+                type="checkbox"
+                class="demo-modal__checkbox-hidden"
+              />
 
-            <span class="demo-modal__checkbox"></span>
+              <span class="demo-modal__checkbox"></span>
 
-            <span class="demo-modal__consent-text">
-              {{ t.demoModal.consent }}
-            </span>
-          </label>
+              <span class="demo-modal__consent-text">
+                {{ t.demoModal.consent }}
+              </span>
+            </label>
 
-            <p
-              v-if="consentError"
-              class="demo-modal__consent-error"
-            >
+            <p v-if="consentError" class="demo-modal__consent-error">
               {{ consentError }}
             </p>
 
@@ -156,7 +226,7 @@
                 type="submit"
                 :disabled="isSubmitting"
               >
-                {{ isSubmitting ? 'Отправка...' : t.demoModal.submit }}
+                {{ isSubmitting ? t.demoModal.submitLoading : t.demoModal.submit }}
               </BaseButton>
             </div>
           </form>
@@ -183,14 +253,28 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, watch, onMounted, onUnmounted, nextTick } from 'vue'
+import { reactive, ref, watch, onMounted, onUnmounted, nextTick, computed } from 'vue'
 import { useLocale } from '../../composables/useLocale'
 import BaseButton from '../ui/BaseButton.vue'
 import lottie from 'lottie-web'
 import successCheck from '../../assets/animations/success-check.json'
 import IMask from 'imask'
+import flagKz from '@/assets/flags/kz.svg'
+import flagRu from '@/assets/flags/ru.svg'
+import flagUz from '@/assets/flags/uz.svg'
+import flagKg from '@/assets/flags/kg.svg'
+import flagOther from '@/assets/flags/other.svg'
 
 const MAIL_API_URL = 'https://idmx.kz/mail/send.php'
+
+type PhoneCountry = {
+  code: string
+  label: string
+  flag: string
+  prefix: string
+  mask: string
+  placeholder: string
+}
 
 const props = defineProps<{
   modelValue: boolean
@@ -202,9 +286,58 @@ const emit = defineEmits<{
 
 const { t } = useLocale()
 
+const phoneCountries = computed(() => [
+  {
+    code: 'KZ',
+    label: 'KZ',
+    flag: flagKz,
+    prefix: '+7',
+    mask: '+{7} (000) 000-00-00',
+    placeholder: '+7 (___) ___-__-__',
+  },
+  {
+    code: 'RU',
+    label: 'RU',
+    flag: flagRu,
+    prefix: '+7',
+    mask: '+{7} (000) 000-00-00',
+    placeholder: '+7 (___) ___-__-__',
+    
+  },
+  {
+    code: 'UZ',
+    label: 'UZ',
+    flag: flagUz,
+    prefix: '+998',
+    mask: '+{998} (00) 000-00-00',
+    placeholder: '+998 (__) ___-__-__',
+  },
+  {
+    code: 'KG',
+    label: 'KG',
+    flag: flagKg,
+    prefix: '+996',
+    mask: '+{996} (000) 000-000',
+    placeholder: '+996 (___) ___-___',
+  },
+  {
+    code: 'OTHER',
+    label: t.value.phone.other,
+    flag: flagOther,
+    prefix: '+',
+    mask: '+000000000000000',
+    placeholder: '+____________',
+  },
+])
+
+const selectedPhoneCountry = ref<PhoneCountry>(phoneCountries.value[0])
+const isPhoneDropdownOpen = ref(false)
+
 const isConsentAccepted = ref(false)
 const consentError = ref('')
 const phoneRef = ref<HTMLInputElement | null>(null)
+const phoneFieldRef = ref<HTMLDivElement | null>(null)
+
 let phoneMask: ReturnType<typeof IMask> | null = null
 
 const form = reactive({
@@ -231,6 +364,26 @@ const submitError = ref('')
 const successIconRef = ref<HTMLDivElement | null>(null)
 let successAnimation: ReturnType<typeof lottie.loadAnimation> | null = null
 
+const togglePhoneDropdown = () => {
+  if (isSubmitting.value) return
+
+  isPhoneDropdownOpen.value = !isPhoneDropdownOpen.value
+}
+
+const selectPhoneCountry = (country: PhoneCountry) => {
+  selectedPhoneCountry.value = country
+  isPhoneDropdownOpen.value = false
+  errors.phone = false
+}
+
+const closePhoneDropdown = (event: MouseEvent) => {
+  const target = event.target as Node
+
+  if (!phoneFieldRef.value?.contains(target)) {
+    isPhoneDropdownOpen.value = false
+  }
+}
+
 const clearErrors = () => {
   errors.firstName = false
   errors.lastName = false
@@ -244,6 +397,7 @@ const close = () => {
   emit('update:modelValue', false)
   isSuccess.value = false
   isSubmitting.value = false
+  isPhoneDropdownOpen.value = false
   clearErrors()
   consentError.value = ''
   successAnimation?.destroy()
@@ -258,6 +412,9 @@ const resetForm = () => {
   form.company = ''
   form.comment = ''
 
+  selectedPhoneCountry.value = phoneCountries.value[0]
+  isPhoneDropdownOpen.value = false
+
   if (phoneMask) {
     phoneMask.value = ''
   }
@@ -270,10 +427,12 @@ const resetForm = () => {
 const initPhoneMask = async () => {
   await nextTick()
 
-  if (!phoneRef.value || phoneMask) return
+  if (!phoneRef.value) return
+
+  phoneMask?.destroy()
 
   phoneMask = IMask(phoneRef.value, {
-    mask: '+{7} (000) 000-00-00',
+    mask: selectedPhoneCountry.value.mask,
     lazy: false,
   })
 
@@ -281,7 +440,7 @@ const initPhoneMask = async () => {
     form.phone = phoneMask?.value || ''
 
     if (errors.phone) {
-      errors.phone = (phoneMask?.unmaskedValue.length ?? 0) !== 11
+      errors.phone = (phoneMask?.unmaskedValue.length ?? 0) < 8
     }
   })
 }
@@ -296,7 +455,7 @@ const validateForm = () => {
 
   errors.firstName = !form.firstName.trim()
   errors.lastName = !form.lastName.trim()
-  errors.phone = (phoneMask?.unmaskedValue.length ?? 0) !== 11
+  errors.phone = (phoneMask?.unmaskedValue.length ?? 0) < 8
   errors.email = !emailRegex.test(form.email)
   errors.company = !form.company.trim()
 
@@ -339,6 +498,7 @@ const submit = async () => {
 
   submitError.value = ''
   isSubmitting.value = true
+  isPhoneDropdownOpen.value = false
 
   const note = [
     form.company ? `Компания: ${form.company}` : '',
@@ -390,9 +550,21 @@ const submit = async () => {
 
 const onKeydown = (event: KeyboardEvent) => {
   if (event.key === 'Escape' && props.modelValue) {
+    if (isPhoneDropdownOpen.value) {
+      isPhoneDropdownOpen.value = false
+      return
+    }
+
     close()
   }
 }
+
+watch(selectedPhoneCountry, async (country) => {
+  form.phone = country.prefix + ' '
+
+  await nextTick()
+  await initPhoneMask()
+})
 
 watch(isSuccess, async (value) => {
   if (!value) return
@@ -420,6 +592,7 @@ watch(
     if (isOpen) {
       isSuccess.value = false
       isSubmitting.value = false
+      isPhoneDropdownOpen.value = false
       clearErrors()
       consentError.value = ''
       successAnimation?.destroy()
@@ -428,17 +601,20 @@ watch(
       await initPhoneMask()
     } else {
       destroyPhoneMask()
+      isPhoneDropdownOpen.value = false
     }
   }
 )
 
 onMounted(() => {
   window.addEventListener('keydown', onKeydown)
+  document.addEventListener('click', closePhoneDropdown)
 })
 
 onUnmounted(() => {
   document.body.style.overflow = ''
   window.removeEventListener('keydown', onKeydown)
+  document.removeEventListener('click', closePhoneDropdown)
 
   destroyPhoneMask()
   successAnimation?.destroy()
@@ -755,6 +931,178 @@ onUnmounted(() => {
   border: solid var(--color-primary); 
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
+}
+
+.phone-field {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--white);
+  overflow: hidden;
+}
+
+.phone-field {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  min-height: 58px;
+  border: 1px solid rgba(46, 166, 255, 0.12);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  overflow: visible;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.phone-field:focus-within {
+  border-color: rgba(1, 157, 255, 0.34);
+  background: #ffffff;
+  box-shadow:
+    0 0 0 4px rgba(1, 157, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.phone-field--error {
+  border-color: rgba(224, 75, 75, 0.75);
+  box-shadow: 0 0 0 4px rgba(224, 75, 75, 0.08);
+}
+
+.phone-select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 0 0 138px;
+  min-height: 58px;
+  padding: 0 14px;
+  border: 0;
+  border-right: 1px solid rgba(46, 166, 255, 0.12);
+  border-radius: 14px 0 0 14px;
+  background: rgba(1, 157, 255, 0.06);
+  color: #23384d;
+  font: inherit;
+  cursor: pointer;
+  user-select: none;
+}
+
+.phone-select:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+}
+
+.phone-select__value {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.phone-select__flag {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.phone-select__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  transition: transform 0.25s ease, opacity 0.2s ease;
+  opacity: 0.8;
+}
+
+.phone-select__arrow--open {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+.phone-select__dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 40;
+  width: 190px;
+  max-height: 260px;
+  overflow-y: auto;
+  padding: 6px;
+  border: 1px solid rgba(46, 166, 255, 0.14);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow:
+    0 18px 48px rgba(5, 14, 28, 0.18),
+    0 8px 18px rgba(5, 14, 28, 0.1);
+}
+
+.phone-select__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: #23384d;
+  font: inherit;
+  cursor: pointer;
+  transition: background 0.18s ease;
+}
+
+.phone-select__option:hover,
+.phone-select__option--active {
+  background: rgba(1, 157, 255, 0.08);
+}
+
+.phone-select__option-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.phone-select__prefix {
+  color: #72859a;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.phone-field__input {
+  flex: 1;
+  min-width: 0;
+  height: 58px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 0 14px 14px 0;
+  background: transparent;
+  color: #23384d;
+  font-size: 16px;
+  outline: none;
+}
+
+.phone-field__input::placeholder {
+  color: #718396;
+}
+
+.phone-field__input:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+}
+.phone-select__flag {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  border-radius: 4px;
+  object-fit: cover;
+ 
 }
 
 @keyframes successFade {

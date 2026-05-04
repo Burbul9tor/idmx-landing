@@ -252,7 +252,7 @@ compliance: {
 
   hubLabel: 'Қатысушы',
   hubTitle: 'Astana Hub',
-  hubText: 'IDMX Astana Hub халықаралық IT-стартаптар технопаркының қатысушысы болып табылады'
+  hubText: '2021 жылдан бастап Astana Hub резиденті — Қазақстандағы ең ірі IT-технопарк экожүйесінің қатысушысы'
 },
 
   integrations: {
@@ -560,7 +560,11 @@ compliance: {
     },
 consent: 'Өтінімді жібере отырып, мен жеке деректерімді өңдеуге келісім беремін',
 consentError: 'Жеке деректерді өңдеуге келісім беру қажет',
+submitLoading: 'Жіберілуде...',
   },
+  phone: {
+  other: 'Басқа'
+},
 } as const
 
 export default kz
