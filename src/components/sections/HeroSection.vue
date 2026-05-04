@@ -560,7 +560,7 @@ const scrollToNext = () => {
   cursor: pointer;
   opacity: 0;
   animation: heroScrollFadeIn 1s ease 1.6s forwards;
-}
+}п
 
 .hero-scroll__mouse {
   width: 26px;

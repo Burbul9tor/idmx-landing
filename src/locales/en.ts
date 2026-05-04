@@ -241,8 +241,8 @@ const en = {
     ],
   },
 compliance: {
-  eyebrow: 'Compliance & Security',
-  title: 'Security Standards',
+eyebrow: 'Standards Compliance',
+title: 'A Product You Can Trust',
   subtitle: 'IDMX complies with international standards and undergoes independent security assessment',
 
   certLabel: 'Certification',
