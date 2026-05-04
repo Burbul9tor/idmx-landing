@@ -253,7 +253,7 @@ compliance: {
 
   hubLabel: 'Участник',
   hubTitle: 'Astana Hub',
-  hubText: 'Резидент Astana Hub с 2021 года - поддержка экосистемы крупнейшего IT-технопарка Казахстана'
+  hubText: 'Участник Astana Hub с 2021 года - поддержка экосистемы крупнейшего IT-технопарка Казахстана'
 },
 
 integrations: {
