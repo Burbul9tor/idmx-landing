@@ -242,7 +242,7 @@ const en = {
   },
 compliance: {
   eyebrow: 'Compliance & Security',
-  title: 'Security verified',
+  title: 'Security Standards',
   subtitle: 'IDMX complies with international standards and undergoes independent security assessment',
 
   certLabel: 'Certification',

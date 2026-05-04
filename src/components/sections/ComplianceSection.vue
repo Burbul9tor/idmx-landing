@@ -81,7 +81,6 @@ const { t } = useLocale()
   padding: 88px 0;
   overflow: hidden;
   background: var(--background-block);
-  border-top: 1px solid rgba(0, 157, 255, 0.12);
 }
 
 .compliance__inner {
@@ -95,8 +94,8 @@ const { t } = useLocale()
 .compliance__head {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
+    align-items: center;
+  text-align: center;
 }
 
 .compliance__eyebrow {
@@ -131,21 +130,28 @@ const { t } = useLocale()
 
 .compliance__subtitle {
   margin: 0;
-  max-width: 1020px;
+  max-width: 800px;
   color: var(--color-subtitle);
   font-size: var(--font-size-subtitle);
 }
 
 .compliance__grid {
   display: grid;
-  grid-template-columns: 1.25fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
+  align-items: stretch;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .compliance-card {
   display: flex;
-  gap: 24px;
-  min-height: 190px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  min-height: 240px;
   padding: 28px;
   border-radius: 24px;
   background: var(--white);
@@ -160,6 +166,7 @@ const { t } = useLocale()
 }
 
 .compliance-card__icon {
+  margin: 0 auto 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -196,6 +203,7 @@ const { t } = useLocale()
   margin: 0 0 18px;
   color: var(--color-subtitle);
   font-size: 15px;
+  max-width: 420px;
 }
 
 .compliance-card__list li::before {
