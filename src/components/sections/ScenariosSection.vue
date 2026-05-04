@@ -576,9 +576,9 @@ const setActive = (index: number) => {
 
 .scenario-preview__metric-value {
   margin-bottom: 8px;
-  font-size: 32px;
+  font-size: 46px;
   font-weight: 800;
-  line-height: 1;
+  line-height: 1.25;
   background: linear-gradient(135deg, #019dff, #36b1ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
