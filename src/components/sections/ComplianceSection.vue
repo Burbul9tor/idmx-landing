@@ -19,25 +19,33 @@
       <div class="compliance__grid">
 
         <!-- ISO -->
-        <article class="compliance-card">
-          <div class="compliance-card__icon">
-            <img :src="isoIcon" alt="ISO certification" />
+      <article class="compliance-card">
+        <div class="compliance-card__icon">
+          <img :src="isoIcon" alt="ISO certification" />
+        </div>
+
+        <div class="compliance-card__content">
+          <div class="compliance-card__label">
+            {{ t.compliance.certLabel }}
           </div>
 
-          <div class="compliance-card__content">
-            <div class="compliance-card__label">
-              {{ t.compliance.certLabel }}
-            </div>
+          <h3 class="compliance-card__title">
+            {{ t.compliance.certTitle }}
+          </h3>
 
-            <h3 class="compliance-card__title">
-              {{ t.compliance.certTitle }}
-            </h3>
-
-            <p class="compliance-card__text">
-              {{ t.compliance.certText }}
-            </p>
-          </div>
-        </article>
+          <p class="compliance-card__text">
+            {{ t.compliance.certText }}
+          </p>
+          <a
+            href="https://idmx.kz/docs/idmx-certificate_of_conformity_ISO15408.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="compliance-card__button"
+          >
+            {{ t.compliance.certLink }}
+          </a>
+        </div>
+      </article>
 
         <!-- ASTANA -->
         <article class="compliance-card">
@@ -57,6 +65,14 @@
             <p class="compliance-card__text">
               {{ t.compliance.hubText }}
             </p>
+           <a
+            href="https://astanahub.com/account/v2/company/1034/profile/activity/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="compliance-card__button"
+          >
+            {{ t.compliance.hubLink }}
+          </a>
           </div>
         </article>
 
@@ -218,6 +234,48 @@ const { t } = useLocale()
   font-size: 12px;
   display: grid;
   place-items: center;
+}
+.compliance-card__content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.compliance-card__button {
+  margin-top: auto;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 16px;
+  border-radius: 12px;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  color: var(--color-primary);
+  background: rgba(1, 157, 255, 0.08);
+  border: 1px solid rgba(1, 157, 255, 0.2);
+
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.compliance-card__button:hover {
+  background: rgba(1, 157, 255, 0.14);
+  border-color: rgba(1, 157, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.compliance-card__button::after {
+  content: '→';
+  margin-left: 6px;
+  transition: transform 0.2s ease;
+}
+
+.compliance-card__button:hover::after {
+  transform: translateX(3px);
 }
 
 @media (max-width: 900px) {

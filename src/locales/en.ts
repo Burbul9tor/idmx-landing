@@ -251,7 +251,9 @@ title: 'A Product You Can Trust',
 
   hubLabel: 'Member',
   hubTitle: 'Astana Hub',
-  hubText: 'Astana Hub resident since 2021 — contributing to the ecosystem of Kazakhstan’s largest IT technopark'
+  hubText: 'Astana Hub resident since 2021 — contributing to the ecosystem of Kazakhstan’s largest IT technopark',
+  certLink: 'View certificate',
+  hubLink: 'Company page',
 },
 
   integrations: {

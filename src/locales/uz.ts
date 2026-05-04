@@ -273,6 +273,8 @@ compliance: {
   hubTitle: 'Astana Hub',
   hubText:
     '2021-yildan boshlab Astana Hub rezidenti — Qozog‘istondagi eng yirik IT texnopark ekotizimining bir qismi',
+    certLink: 'Sertifikatni ko‘rish',
+    hubLink: 'Kompaniya sahifasi',
 },
 
 integrations: {
