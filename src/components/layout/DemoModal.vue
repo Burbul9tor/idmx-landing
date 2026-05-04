@@ -985,7 +985,7 @@ onUnmounted(() => {
   border: 0;
   border-right: 1px solid rgba(46, 166, 255, 0.12);
   border-radius: 14px 0 0 14px;
-  background: rgba(1, 157, 255, 0.06);
+  background: var(--white);
   color: #23384d;
   font: inherit;
   cursor: pointer;

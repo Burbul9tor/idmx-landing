@@ -315,8 +315,8 @@ title: 'A Product You Can Trust',
           'The system identifies roles, starts approval, and grants access without emails or Excel.',
 
         metric: {
-          value: 'Up to 80%',
-          text: 'reduction in access provisioning time',
+        value: 'by 70%',
+        text: 'reduction in onboarding time at a financial company with 5,000 employees',
         },
 
         result: 'The employee starts working without delays.',
@@ -462,7 +462,7 @@ title: 'A Product You Can Trust',
     {
       question: 'Can it be integrated with our systems?',
       answer:
-        'Yes, IDMX supports integration with most enterprise systems, including HR platforms, Active Directory, email services, and other data sources.',
+        'Yes. IDMX provides out-of-the-box connectors for the most common enterprise systems: 1C, Colvir, Microsoft Exchange, Active Directory / LDAP, as well as HR systems and ERP platforms. Integration with non-standard systems is available via API.',
     },
     {
       question: 'Is the solution suitable for large enterprises?',

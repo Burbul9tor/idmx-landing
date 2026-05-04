@@ -345,8 +345,8 @@ scenariosSection: {
       'Tizim o‘zi rollarni aniqlaydi, tasdiqlashni ishga tushiradi va kirishlarni yozishmalar va Excel’siz beradi.',
 
     metric: {
-      value: '80% gacha',
-      text: 'kirishlarni berish vaqtining qisqarishi',
+    value: '70% ga',
+    text: '5000 nafar xodimga ega moliyaviy kompaniyada onboarding vaqti qisqardi',
     },
 
     result: 'Xodim ishni kechikishsiz boshlaydi.',
@@ -492,7 +492,7 @@ faqSection: {
     {
       question: 'Bizning tizimlar bilan integratsiya qilish mumkinmi?',
       answer:
-        'Ha, IDMX ko‘pgina korporativ tizimlar bilan integratsiyani qo‘llab-quvvatlaydi, jumladan HR tizimlari, Active Directory, pochta servislar va boshqa ma’lumot manbalari.',
+        'Ha. IDMX eng keng tarqalgan korporativ tizimlar uchun tayyor konnektorlarga ega: 1C, Colvir, Microsoft Exchange, Active Directory / LDAP, shuningdek HR tizimlari va ERP platformalar. Noodatiy tizimlar uchun API orqali integratsiya mavjud.',
     },
     {
       question: 'Yechim yirik kompaniyalar uchun mosmi?',
